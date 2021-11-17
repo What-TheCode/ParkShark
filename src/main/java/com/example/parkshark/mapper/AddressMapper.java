@@ -1,7 +1,7 @@
 package com.example.parkshark.mapper;
 
 import com.example.parkshark.domain.address.Address;
-import com.example.parkshark.domain.dto.address.CreateAddressDTO;
+import com.example.parkshark.domain.dto.address.CreateAddressDto;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,11 +13,11 @@ public class AddressMapper {
         this.postalCodeMapper = postalCodeMapper;
     }
 
-    public Address toEntity(CreateAddressDTO createAddressDTO) {
+    public Address toEntity(CreateAddressDto createAddressDto) {
         return new Address.Builder()
-                .withStreetName(createAddressDTO.getStreetName())
-                .withStreetNumber(createAddressDTO.getStreetNumber())
-                .withPostalCode(this.postalCodeMapper.toEntity(createAddressDTO.getPostalCode()))
+                .withStreetName(createAddressDto.getStreetName())
+                .withStreetNumber(createAddressDto.getStreetNumber())
+                .withPostalCode(this.postalCodeMapper.toEntity(createAddressDto.getPostalCode()))
                 .build();
     }
 

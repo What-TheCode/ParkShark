@@ -1,15 +1,11 @@
 package com.example.parkshark.service;
 
-import com.example.parkshark.domain.dto.parkinglotDTO.CreateParkinglotDTO;
-import com.example.parkshark.domain.dto.parkinglotDTO.ParkinglotDTO;
-import com.example.parkshark.domain.parkinglot.Parkinglot;
+import com.example.parkshark.domain.dto.parkinglot.CreateParkinglotDto;
 import com.example.parkshark.mapper.ParkinglotMapper;
 import com.example.parkshark.repository.ParkinglotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional
@@ -24,7 +20,7 @@ public class ParkinglotService {
         this.parkinglotMapper = parkinglotMapper;
     }
 
-    public void createParkinglot(CreateParkinglotDTO createParkinglotDto) {
+    public void createParkinglot(CreateParkinglotDto createParkinglotDto) {
         this.parkinglotRepository.save(parkinglotMapper.toEntity(createParkinglotDto));
     }
 

@@ -1,16 +1,12 @@
 package com.example.parkshark.domain.dto.address;
 
-import com.example.parkshark.domain.address.PostalCode;
-
-import javax.persistence.*;
-
-public class CreateAddressDTO {
+public class CreateAddressDto {
 
     private String streetName;
     private int streetNumber;
-    private CreatePostalCodeDTO postalCode;
+    private CreatePostalCodeDto postalCode;
 
-    public CreateAddressDTO(String streetName, int streetNumber, CreatePostalCodeDTO postalCode) {
+    public CreateAddressDto(String streetName, int streetNumber, CreatePostalCodeDto postalCode) {
         this.streetName = streetName;
         this.streetNumber = streetNumber;
         this.postalCode = postalCode;
@@ -24,7 +20,7 @@ public class CreateAddressDTO {
         return streetNumber;
     }
 
-    public CreatePostalCodeDTO getPostalCode() {
+    public CreatePostalCodeDto getPostalCode() {
         return postalCode;
     }
 }

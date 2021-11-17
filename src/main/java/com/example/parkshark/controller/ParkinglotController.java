@@ -1,8 +1,7 @@
 package com.example.parkshark.controller;
 
-import com.example.parkshark.domain.dto.parkinglotDTO.CreateParkinglotDTO;
-import com.example.parkshark.domain.dto.parkinglotDTO.ParkinglotDTO;
-import com.example.parkshark.security.switchsecure.SecurityGuard;
+import com.example.parkshark.domain.dto.parkinglot.CreateParkinglotDto;
+import com.example.parkshark.domain.dto.parkinglot.ParkinglotDto;
 import com.example.parkshark.service.ParkinglotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,14 +24,14 @@ public class ParkinglotController {
     @PostMapping(MediaType.APPLICATION_JSON_VALUE)
     // @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
     @ResponseStatus(HttpStatus.CREATED)
-    public void createParkinglot(@RequestBody CreateParkinglotDTO createParkinglotDto) {
+    public void createParkinglot(@RequestBody CreateParkinglotDto createParkinglotDto) {
         parkinglotService.createParkinglot(createParkinglotDto);
     }
 
     @GetMapping(MediaType.APPLICATION_JSON_VALUE)
     // @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
     @ResponseStatus(HttpStatus.OK)
-    public List<ParkinglotDTO> getParkinglots() {
+    public List<ParkinglotDto> getParkinglots() {
         return null;
     }
 }

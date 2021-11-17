@@ -1,9 +1,6 @@
 package com.example.parkshark.mapper;
 
-import com.example.parkshark.domain.Person;
-import com.example.parkshark.domain.address.Address;
-import com.example.parkshark.domain.address.PostalCode;
-import com.example.parkshark.domain.dto.parkinglotDTO.CreateParkinglotDTO;
+import com.example.parkshark.domain.dto.parkinglot.CreateParkinglotDto;
 import com.example.parkshark.domain.parkinglot.Parkinglot;
 import org.springframework.stereotype.Component;
 
@@ -18,14 +15,14 @@ public class ParkinglotMapper {
         this.addressMapper = addressMapper;
     }
 
-    public Parkinglot toEntity(CreateParkinglotDTO createParkingLotDTO) {
+    public Parkinglot toEntity(CreateParkinglotDto createParkinglotDto) {
         return new Parkinglot.Builder()
-                .withName(createParkingLotDTO.getName())
-                .withCategory(createParkingLotDTO.getCategory())
-                .withCapacity(createParkingLotDTO.getCapacity())
-                .withContactPerson(this.personMapper.toEntity(createParkingLotDTO.getContactPerson()))
-                .withAddress(this.addressMapper.toEntity(createParkingLotDTO.getAddress()))
-                .withPricePerHour(createParkingLotDTO.getPricePerHour())
+                .withName(createParkinglotDto.getName())
+                .withCategory(createParkinglotDto.getCategory())
+                .withCapacity(createParkinglotDto.getCapacity())
+                .withContactPerson(this.personMapper.toEntity(createParkinglotDto.getContactPerson()))
+                .withAddress(this.addressMapper.toEntity(createParkinglotDto.getAddress()))
+                .withPricePerHour(createParkinglotDto.getPricePerHour())
                 .build();
     }
 }

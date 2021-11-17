@@ -1,7 +1,7 @@
 package com.example.parkshark.mapper;
 
 import com.example.parkshark.domain.Division;
-import com.example.parkshark.domain.dto.DivisionDto;
+import com.example.parkshark.domain.dto.division.DivisionDto;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -10,12 +10,23 @@ import java.util.stream.Collectors;
 @Component
 public class DivisionMapper {
 
+    private PersonMapper personMapper;
+
+    public DivisionMapper(PersonMapper personMapper) {
+        this.personMapper = personMapper;
+    }
+
     public Division toEntity(DivisionDto divisionDto){
-        return new Division(divisionDto.getId(),divisionDto.getName(),divisionDto.getFullName(),divisionDto.getDirectorId());
+        return new Division.Builder()
+                .withId(divisionDto.getId())
+                .withName(divisionDto.getName())
+                .withOriginalName(divisionDto.getOriginalName())
+                .withDirector(personMapper.toEntity(divisionDto.getDirector()))
+                .build();
     }
 
     public DivisionDto toDto(Division division){
-        return new DivisionDto(division.getId(), division.getName(), division.getOriginalName(), division.getDirector());
+        return new DivisionDto(division.getId(), division.getName(), division.getOriginalName(), personMapper.toDto(division.getDirector()));
     }
 
     public List<DivisionDto> toDto(List<Division> orderList){

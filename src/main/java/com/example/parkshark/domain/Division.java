@@ -1,5 +1,7 @@
 package com.example.parkshark.domain;
 
+import com.example.parkshark.domain.address.Address;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -7,15 +9,14 @@ import java.util.Objects;
 @Table(name = "division")
 public class Division {
     @Id
-    @SequenceGenerator(name = "division_id_seq", sequenceName = "division_id_seq", initialValue = 1, allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "division_id_seq")
+//    @SequenceGenerator(name = "division_id_seq", sequenceName = "division_id_seq", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     @Column(name = "name")
     private String name;
     @Column(name = "original_name")
     private String originalName;
-    @ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "director_id")
     private Person director;
 
@@ -62,5 +63,44 @@ public class Division {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public static class Builder {
+
+        private int id;
+        private String name;
+        private String originalName;
+        private Person director;
+
+
+        public Division.Builder withId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public Division.Builder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Division.Builder withOriginalName(String originalName) {
+            this.originalName = originalName;
+            return this;
+        }
+
+        public Division.Builder withDirector(Person director) {
+            this.director = director;
+            return this;
+        }
+
+        public Division build() {
+            Division division = new Division();
+            division.id = this.id;
+            division.name = this.name;
+            division.originalName = this.originalName;
+            division.director = this.director;
+
+            return division;
+        }
     }
 }

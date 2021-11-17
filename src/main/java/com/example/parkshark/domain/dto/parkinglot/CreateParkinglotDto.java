@@ -1,21 +1,21 @@
-package com.example.parkshark.domain.dto.parkinglotDTO;
+package com.example.parkshark.domain.dto.parkinglot;
 
-import com.example.parkshark.domain.dto.address.CreateAddressDTO;
-import com.example.parkshark.domain.dto.person.CreatePersonDTO;
+import com.example.parkshark.domain.dto.address.CreateAddressDto;
+import com.example.parkshark.domain.dto.person.CreatePersonDto;
 import com.example.parkshark.domain.parkinglot.ParkinglotCategory;
 
-public class CreateParkinglotDTO {
+public class CreateParkinglotDto {
 
     private String name;
     private ParkinglotCategory category;
     private int capacity;
-    private CreatePersonDTO contactPerson;
-    private CreateAddressDTO address;
+    private CreatePersonDto contactPerson;
+    private CreateAddressDto address;
     private double pricePerHour;
 //    private int divisionId;
 
 
-    public CreateParkinglotDTO(String name, ParkinglotCategory category, int capacity, CreatePersonDTO contactPerson, CreateAddressDTO address, double pricePerHour) {
+    public CreateParkinglotDto(String name, ParkinglotCategory category, int capacity, CreatePersonDto contactPerson, CreateAddressDto address, double pricePerHour) {
         this.name = name;
         this.category = category;
         this.capacity = capacity;
@@ -36,11 +36,11 @@ public class CreateParkinglotDTO {
         return capacity;
     }
 
-    public CreatePersonDTO getContactPerson() {
+    public CreatePersonDto getContactPerson() {
         return contactPerson;
     }
 
-    public CreateAddressDTO getAddress() {
+    public CreateAddressDto getAddress() {
         return address;
     }
 

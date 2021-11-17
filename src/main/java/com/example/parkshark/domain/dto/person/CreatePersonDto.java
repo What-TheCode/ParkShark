@@ -1,19 +1,16 @@
 package com.example.parkshark.domain.dto.person;
 
-import com.example.parkshark.domain.address.Address;
-import com.example.parkshark.domain.dto.address.CreateAddressDTO;
+import com.example.parkshark.domain.dto.address.CreateAddressDto;
 
-import javax.persistence.*;
-
-public class CreatePersonDTO {
+public class CreatePersonDto {
 
     private String firstName;
     private String lastName;
-    private CreateAddressDTO createAddressDTO;
+    private CreateAddressDto createAddressDTO;
     private String telephone;
     private String email;
 
-    public CreatePersonDTO(String firstName, String lastName, CreateAddressDTO createAddressDTO, String telephone, String email) {
+    public CreatePersonDto(String firstName, String lastName, CreateAddressDto createAddressDTO, String telephone, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.createAddressDTO = createAddressDTO;
@@ -29,7 +26,7 @@ public class CreatePersonDTO {
         return lastName;
     }
 
-    public CreateAddressDTO getCreateAddressDTO() {
+    public CreateAddressDto getCreateAddressDTO() {
         return createAddressDTO;
     }
 

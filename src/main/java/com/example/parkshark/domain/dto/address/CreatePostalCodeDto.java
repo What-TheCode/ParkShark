@@ -2,12 +2,12 @@ package com.example.parkshark.domain.dto.address;
 
 import javax.persistence.Column;
 
-public class CreatePostalCodeDTO {
+public class CreatePostalCodeDto {
 
     private int postalCode;
     private String region;
 
-    public CreatePostalCodeDTO(int postalCode, String region) {
+    public CreatePostalCodeDto(int postalCode, String region) {
         this.postalCode = postalCode;
         this.region = region;
     }

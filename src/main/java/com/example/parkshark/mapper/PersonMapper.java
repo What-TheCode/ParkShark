@@ -1,7 +1,7 @@
 package com.example.parkshark.mapper;
 
 import com.example.parkshark.domain.Person;
-import com.example.parkshark.domain.dto.person.CreatePersonDTO;
+import com.example.parkshark.domain.dto.person.CreatePersonDto;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,13 +13,13 @@ public class PersonMapper {
         this.addressMapper = addressMapper;
     }
 
-    public Person toEntity(CreatePersonDTO createPersonDTO) {
+    public Person toEntity(CreatePersonDto createPersonDto) {
         return new Person.Builder()
-                .withFirstName(createPersonDTO.getFirstName())
-                .withLastName(createPersonDTO.getLastName())
-                .withAddress(this.addressMapper.toEntity(createPersonDTO.getCreateAddressDTO()))
-                .withTelephone(createPersonDTO.getTelephone())
-                .withEmail(createPersonDTO.getEmail())
+                .withFirstName(createPersonDto.getFirstName())
+                .withLastName(createPersonDto.getLastName())
+                .withAddress(this.addressMapper.toEntity(createPersonDto.getCreateAddressDTO()))
+                .withTelephone(createPersonDto.getTelephone())
+                .withEmail(createPersonDto.getEmail())
                 .build();
     }
 }

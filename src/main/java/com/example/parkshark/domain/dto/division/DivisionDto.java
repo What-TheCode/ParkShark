@@ -1,20 +1,20 @@
-package com.example.parkshark.domain.dto;
+package com.example.parkshark.domain.dto.division;
 
-import com.example.parkshark.domain.Person;
+import com.example.parkshark.domain.dto.person.CreatePersonDto;
 
 import java.util.Objects;
 
 public class DivisionDto {
     private int id;
     private String name;
-    private String fullName;
-    private Person directorId;
+    private String originalName;
+    private CreatePersonDto director;
 
-    public DivisionDto(int id, String name, String fullName, Person directorId) {
+    public DivisionDto(int id, String name, String fullName, PersonDto directorId) {
         this.id = id;
         this.name = name;
-        this.fullName = fullName;
-        this.directorId = directorId;
+        this.originalName = fullName;
+        this.director = directorId;
     }
 
     public int getId() {
@@ -25,12 +25,12 @@ public class DivisionDto {
         return name;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getOriginalName() {
+        return originalName;
     }
 
-    public Person getDirectorId() {
-        return directorId;
+    public CreatePersonDto getDirector() {
+        return director;
     }
 
     @Override
