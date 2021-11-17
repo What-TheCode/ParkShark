@@ -23,14 +23,14 @@ public class ParkinglotController {
     }
 
     @PostMapping(MediaType.APPLICATION_JSON_VALUE)
-    @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
+    // @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
     @ResponseStatus(HttpStatus.CREATED)
     public void createParkinglot(@RequestBody CreateParkinglotDTO createParkinglotDto) {
         parkinglotService.createParkinglot(createParkinglotDto);
     }
 
     @GetMapping(MediaType.APPLICATION_JSON_VALUE)
-    @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
+    // @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
     @ResponseStatus(HttpStatus.OK)
     public List<ParkinglotDTO> getParkinglots() {
         return null;
