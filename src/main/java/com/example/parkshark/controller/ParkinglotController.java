@@ -34,12 +34,10 @@ public class ParkinglotController {
     public List<ParkinglotDto> getParkinglots() {
         return parkinglotService.getAll();
     }
-/*
-    @GetMapping(value = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")
+
+    @GetMapping(produces = "application/json", path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ParkinglotDto getParkinglotById(@PathVariable("id") String id) {
         return parkinglotService.getById(id);
     }
-
- */
 }
