@@ -1,5 +1,7 @@
 package com.example.parkshark.domain.address;
 
+import com.example.parkshark.domain.Person;
+
 import javax.persistence.*;
 
 @Entity
@@ -28,5 +30,44 @@ public class Address {
         this.streetName = streetName;
         this.streetNumber = streetNumber;
         this.postalCode = postalCode;
+    }
+
+
+    public static class Builder {
+
+        private int id;
+        private String streetName;
+        private int streetNumber;
+        private PostalCode postalCode;
+
+        public Builder withId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder withStreetName(String streetName) {
+            this.streetName = streetName;
+            return this;
+        }
+
+        public Builder withStreetNumber(int streetNumber) {
+            this.streetNumber = streetNumber;
+            return this;
+        }
+
+        public Builder withPostalCode(PostalCode postalCode) {
+            this.postalCode = postalCode;
+            return this;
+        }
+
+        public Address build() {
+            Address address = new Address();
+            address.id = this.id;
+            address.streetName = this.streetName;
+            address.streetNumber = this.streetNumber;
+            address.postalCode = this.postalCode;
+
+            return address;
+        }
     }
 }

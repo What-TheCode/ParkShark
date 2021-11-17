@@ -10,34 +10,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class ParkinglotMapper {
 
+    private PersonMapper personMapper;
+    private AddressMapper addressMapper;
+
+    public ParkinglotMapper(PersonMapper personMapper, AddressMapper addressMapper) {
+        this.personMapper = personMapper;
+        this.addressMapper = addressMapper;
+    }
+
     public Parkinglot toEntity(CreateParkinglotDTO createParkingLotDTO) {
-        return new Parkinglot(
-                createParkingLotDTO.getName(),
-                createParkingLotDTO.getCategory(),
-                createParkingLotDTO.getCapacity(),
-                new Person(
-                        createParkingLotDTO.getContactPerson().getFirstName(),
-                        createParkingLotDTO.getContactPerson().getLastName(),
-                        new Address(
-                                createParkingLotDTO.getContactPerson().getCreateAddressDTO().getStreetName(),
-                                createParkingLotDTO.getContactPerson().getCreateAddressDTO().getStreetNumber(),
-                                new PostalCode(
-                                        createParkingLotDTO.getContactPerson().getCreateAddressDTO().getPostalCode().getPostalCode(),
-                                        createParkingLotDTO.getContactPerson().getCreateAddressDTO().getPostalCode().getRegion()
-                                )
-                        ),
-                        createParkingLotDTO.getContactPerson().getTelephone(),
-                        createParkingLotDTO.getContactPerson().getEmail()
-                ),
-                new Address(
-                        createParkingLotDTO.getAddress().getStreetName(),
-                        createParkingLotDTO.getAddress().getStreetNumber(),
-                        new PostalCode(
-                                createParkingLotDTO.getAddress().getPostalCode().getPostalCode(),
-                                createParkingLotDTO.getAddress().getPostalCode().getRegion()
-                        )
-                ),
-                createParkingLotDTO.getPricePerHour()
-        );
+        return new Parkinglot.Builder()
+                .withName(createParkingLotDTO.getName())
+                .withCategory(createParkingLotDTO.getCategory())
+                .withCapacity(createParkingLotDTO.getCapacity())
+                .withContactPerson(this.personMapper.toEntity(createParkingLotDTO.getContactPerson()))
+                .withAddress(this.addressMapper.toEntity(createParkingLotDTO.getAddress()))
+                .withPricePerHour(createParkingLotDTO.getPricePerHour())
+                .build();
     }
 }
