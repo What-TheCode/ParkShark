@@ -14,15 +14,16 @@ public class Division {
     private String name;
     @Column(name = "original_name")
     private String originalName;
-    @Column(name = "directorId")
-    private int directorId;
+    @ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinColumn(name = "director_id")
+    private Person director;
 
     public Division() {
     }
 
-    public Division(String originalName, int directorId) {
+    public Division(String originalName, Person directorId) {
         this.originalName = originalName;
-        this.directorId = directorId;
+        this.director = directorId;
     }
 
 
