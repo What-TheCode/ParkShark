@@ -1,5 +1,6 @@
 package com.example.parkshark.controller;
 
+import com.example.parkshark.domain.dto.division.CreateDivisionDto;
 import com.example.parkshark.domain.dto.division.DivisionDto;
 import com.example.parkshark.service.DivisionService;
 import org.springframework.http.HttpStatus;
@@ -19,9 +20,9 @@ public class DivisionController {
     @PostMapping(consumes = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
 //    @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
-    public void createDivision(@RequestBody DivisionDto divisionDto/*,
+    public void createDivision(@RequestBody CreateDivisionDto createDivisionDto/*,
                                @RequestHeader String Authorization*/ ){
-        divisionService.saveDivision(divisionDto);
+        divisionService.saveDivision(createDivisionDto);
     }
 
     @GetMapping(produces = {"application/json"})

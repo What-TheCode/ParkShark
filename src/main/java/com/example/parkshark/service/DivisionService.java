@@ -1,5 +1,6 @@
 package com.example.parkshark.service;
 
+import com.example.parkshark.domain.dto.division.CreateDivisionDto;
 import com.example.parkshark.domain.dto.division.DivisionDto;
 import com.example.parkshark.mapper.DivisionMapper;
 import com.example.parkshark.repository.DivisionRepository;
@@ -24,7 +25,7 @@ public class DivisionService {
         return divisionMapper.toDto(divisionRepository.findAll());
     }
 
-    public void saveDivision(DivisionDto divisionDto){
-        divisionRepository.save(divisionMapper.toEntity(divisionDto));
+    public void saveDivision(CreateDivisionDto createDivisionDto){
+        divisionRepository.save(divisionMapper.toEntity(createDivisionDto));
     }
 }
