@@ -10,6 +10,7 @@ import javax.persistence.Table;
 public class PostalCode {
 
     @Id
+    @Column(name = "postal_code")
     private int postalCode;
 
     @Column
