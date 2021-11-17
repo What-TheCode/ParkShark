@@ -3,7 +3,7 @@ package com.example.parkshark.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Division")
+@Table(name = "division")
 public class Division {
     @Id
     @SequenceGenerator(name = "division_id_seq", sequenceName = "division_id_seq", initialValue = 1, allocationSize = 1)
