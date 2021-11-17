@@ -35,12 +35,21 @@ public class Parkinglot {
     @Column
     private double pricePerHour;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-    @JoinColumn(name = "division_id")
-    private Division division;
+//    @ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+//    @JoinColumn(name = "division_id")
+//    private Division division;
 
 
     public Parkinglot() {
 
+    }
+
+    public Parkinglot(String name, ParkinglotCategory category, int capacity, Person contactPerson, Address address, double pricePerHour) {
+        this.name = name;
+        this.category = category;
+        this.capacity = capacity;
+        this.contactPerson = contactPerson;
+        this.address = address;
+        this.pricePerHour = pricePerHour;
     }
 }

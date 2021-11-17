@@ -31,4 +31,12 @@ public class Person {
     public Person() {
 
     }
+
+    public Person(String firstName, String lastName, Address address, String telephone, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.telephone = telephone;
+        this.email = email;
+    }
 }

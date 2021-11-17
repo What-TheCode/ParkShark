@@ -18,4 +18,9 @@ public class PostalCode {
     public PostalCode() {
 
     }
+
+    public PostalCode(int postalCode, String region) {
+        this.postalCode = postalCode;
+        this.region = region;
+    }
 }
