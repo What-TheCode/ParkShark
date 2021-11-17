@@ -1,6 +1,7 @@
 package com.example.parkshark.domain;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "division")
@@ -21,10 +22,45 @@ public class Division {
     public Division() {
     }
 
-    public Division(String originalName, Person directorId) {
+    public Division(int id, String name, String originalName, Person director) {
+        this.id = id;
+        this.name = name;
         this.originalName = originalName;
-        this.director = directorId;
+        this.director = director;
     }
 
+    public Division(String name, String originalName, Person director) {
+        this.name = name;
+        this.originalName = originalName;
+        this.director = director;
+    }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getOriginalName() {
+        return originalName;
+    }
+
+    public Person getDirector() {
+        return director;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Division division = (Division) o;
+        return id == division.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

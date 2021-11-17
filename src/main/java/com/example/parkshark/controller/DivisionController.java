@@ -1,18 +1,28 @@
 package com.example.parkshark.controller;
 
+import com.example.parkshark.domain.Division;
 import com.example.parkshark.domain.dto.DivisionDto;
+import com.example.parkshark.mapper.DivisionMapper;
 import com.example.parkshark.security.switchsecure.SecurityGuard;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.parkshark.service.DivisionService;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("division")
 public class DivisionController {
-    @PostMapping()
+    public final DivisionService divisionService;
+
+    public DivisionController(DivisionService divisionService) {
+        this.divisionService = divisionService;
+    }
+
+    @PostMapping(consumes = {"application/json"})
+    @ResponseStatus(HttpStatus.CREATED)
     @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
-    public DivisionDto createDivision(){
-        return null;
+    public void createDivision(@RequestBody DivisionDto divisionDto,
+                               @RequestHeader String Authorization ){
+        divisionService.saveDivision(divisionDto);
     }
 
 }
