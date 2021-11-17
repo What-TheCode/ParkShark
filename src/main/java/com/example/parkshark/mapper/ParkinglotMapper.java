@@ -1,14 +1,18 @@
 package com.example.parkshark.mapper;
 
 import com.example.parkshark.domain.dto.parkinglot.CreateParkinglotDto;
+import com.example.parkshark.domain.dto.parkinglot.ParkinglotDto;
 import com.example.parkshark.domain.parkinglot.Parkinglot;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class ParkinglotMapper {
 
-    private PersonMapper personMapper;
-    private AddressMapper addressMapper;
+    private final PersonMapper personMapper;
+    private final AddressMapper addressMapper;
 
     public ParkinglotMapper(PersonMapper personMapper, AddressMapper addressMapper) {
         this.personMapper = personMapper;
@@ -24,5 +28,19 @@ public class ParkinglotMapper {
                 .withAddress(this.addressMapper.toEntity(createParkinglotDto.getAddress()))
                 .withPricePerHour(createParkinglotDto.getPricePerHour())
                 .build();
+    }
+
+    public ParkinglotDto toDto(Parkinglot parkinglot) {
+        return new ParkinglotDto.Builder()
+                .withId(parkinglot.getId())
+                .withName(parkinglot.getName())
+                .withCapacity(parkinglot.getCapacity())
+                .withEmail(parkinglot.getContactPerson().getEmail())
+                .withTel(parkinglot.getContactPerson().getTelephone())
+                .build();
+    }
+
+    public List<ParkinglotDto> toDto(List<Parkinglot> parkinglotList) {
+        return parkinglotList.stream().map(this::toDto).collect(Collectors.toList());
     }
 }

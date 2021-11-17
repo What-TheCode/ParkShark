@@ -32,6 +32,14 @@ public class ParkinglotController {
     // @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
     @ResponseStatus(HttpStatus.OK)
     public List<ParkinglotDto> getParkinglots() {
-        return null;
+        return parkinglotService.getAll();
     }
+/*
+    @GetMapping(value = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ParkinglotDto getParkinglotById(@PathVariable("id") String id) {
+        return parkinglotService.getById(id);
+    }
+
+ */
 }
