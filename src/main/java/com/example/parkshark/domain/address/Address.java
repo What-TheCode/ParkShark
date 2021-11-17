@@ -32,6 +32,21 @@ public class Address {
         this.postalCode = postalCode;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public int getStreetNumber() {
+        return streetNumber;
+    }
+
+    public PostalCode getPostalCode() {
+        return postalCode;
+    }
 
     public static class Builder {
 

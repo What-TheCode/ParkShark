@@ -28,7 +28,7 @@ public class DivisionController {
     @ResponseStatus(HttpStatus.OK)
     //    @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
     public List<DivisionDto> getAllDivision(/*@RequestHeader String Authorization*/){
-        return divisionService.findall();
+        return divisionService.findAll();
     }
 
 }
