@@ -3,14 +3,14 @@ package com.example.parkshark.mapper;
 import com.example.parkshark.domain.Person;
 import com.example.parkshark.domain.address.Address;
 import com.example.parkshark.domain.address.PostalCode;
-import com.example.parkshark.domain.dto.parkingLotDTO.CreateParkingLotDTO;
+import com.example.parkshark.domain.dto.parkinglotDTO.CreateParkinglotDTO;
 import com.example.parkshark.domain.parkinglot.Parkinglot;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ParkingLotMapper {
+public class ParkinglotMapper {
 
-    public Parkinglot toEntity(CreateParkingLotDTO createParkingLotDTO) {
+    public Parkinglot toEntity(CreateParkinglotDTO createParkingLotDTO) {
         return new Parkinglot(
                 createParkingLotDTO.getName(),
                 createParkingLotDTO.getCategory(),

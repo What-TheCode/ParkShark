@@ -12,7 +12,7 @@ public class DivisionController {
     @PostMapping()
     @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
     public DivisionDto createDivision(){
-
+        return null;
     }
 
 }
