@@ -58,7 +58,9 @@ public class Division {
     }
 
 
-    public Division getParentdivision(){return parentdivision;}
+    public Division getParentdivision() {
+        return parentdivision;
+    }
 
 
     @Override
@@ -66,7 +68,7 @@ public class Division {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Division division = (Division) o;
-        return id == division.id;
+        return Objects.equals(id, division.id);
     }
 
     @Override
@@ -83,11 +85,6 @@ public class Division {
         private Division parentdivision;
 
 
-        public Division.Builder withId(int id) {
-            this.id = id;
-            return this;
-        }
-
         public Division.Builder withName(String name) {
             this.name = name;
             return this;
@@ -103,7 +100,7 @@ public class Division {
             return this;
         }
 
-        public Division.Builder withParentdivision(Division parentdivision){
+        public Division.Builder withParentdivision(Division parentdivision) {
             this.parentdivision = parentdivision;
             return this;
         }
@@ -114,7 +111,7 @@ public class Division {
             division.name = this.name;
             division.originalName = this.originalName;
             division.director = this.director;
-            division.parentdivision=this.parentdivision;
+            division.parentdivision = this.parentdivision;
 
             return division;
         }

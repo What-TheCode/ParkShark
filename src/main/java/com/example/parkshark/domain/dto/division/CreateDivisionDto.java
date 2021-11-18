@@ -4,10 +4,10 @@ import com.example.parkshark.domain.dto.person.CreatePersonDto;
 import org.springframework.stereotype.Component;
 
 public class CreateDivisionDto {
-    private String name;
-    private String originalName;
-    private CreatePersonDto director;
-    private int parentdivisionId;
+    private final String name;
+    private final String originalName;
+    private final CreatePersonDto director;
+    private final int parentdivisionId;
 
     public CreateDivisionDto(String name, String originalName, CreatePersonDto director, int parentdivisionId) {
         this.name = name;

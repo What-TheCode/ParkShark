@@ -14,24 +14,24 @@ import java.util.List;
 @Transactional
 public class DivisionService {
 
-    private DivisionRepository divisionRepository;
-    private DivisionMapper divisionMapper;
+    private final DivisionRepository divisionRepository;
+    private final DivisionMapper divisionMapper;
 
     public DivisionService(DivisionRepository divisionRepository, DivisionMapper divisionMapper) {
         this.divisionRepository = divisionRepository;
         this.divisionMapper = divisionMapper;
     }
 
-    public List<DivisionDto> findAll(){
+    public List<DivisionDto> findAll() {
         return divisionMapper.toDto(divisionRepository.findAll());
     }
 
-    public void saveDivision(CreateDivisionDto createDivisionDto){
+    public void saveDivision(CreateDivisionDto createDivisionDto) {
         divisionRepository.save(divisionMapper.toEntity(createDivisionDto));
     }
 
-    public DivisionDto findById(int id){
-        if(divisionRepository.findById(id).isEmpty()){
+    public DivisionDto findById(int id) {
+        if (divisionRepository.findById(id).isEmpty()) {
             throw new IllegalArgumentException("There is no division with this id.");
         }
         return divisionMapper.toDto(divisionRepository.getById(id));
