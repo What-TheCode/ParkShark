@@ -2,6 +2,7 @@ package com.example.parkshark.controller;
 
 import com.example.parkshark.domain.dto.division.CreateDivisionDto;
 import com.example.parkshark.domain.dto.division.DivisionDto;
+import com.example.parkshark.security.switchsecure.SecurityGuard;
 import com.example.parkshark.service.DivisionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
