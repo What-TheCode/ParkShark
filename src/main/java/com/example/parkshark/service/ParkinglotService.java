@@ -1,13 +1,13 @@
 package com.example.parkshark.service;
 
 import com.example.parkshark.domain.dto.parkinglot.CreateParkinglotDto;
+import com.example.parkshark.domain.dto.parkinglot.ParkinglotDetailDto;
 import com.example.parkshark.domain.dto.parkinglot.ParkinglotDto;
 import com.example.parkshark.domain.parkinglot.Parkinglot;
 import com.example.parkshark.exceptions.InvalidEmailException;
 import com.example.parkshark.exceptions.InvalidTelephoneException;
 import com.example.parkshark.mapper.ParkinglotMapper;
 import com.example.parkshark.repository.ParkinglotRepository;
-import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,10 +45,10 @@ public class ParkinglotService {
         return parkinglotMapper.toDto(parkinglotRepository.findAll());
     }
 
-    public ParkinglotDto getById(String id) {
+    public ParkinglotDetailDto getById(String id) {
         int currentId = Integer.parseInt(id);
         Parkinglot parkinglot = parkinglotRepository.findById(currentId).orElseThrow();
-        return parkinglotMapper.toDto(parkinglot);
+        return parkinglotMapper.toDetailDto(parkinglot);
     }
 
 

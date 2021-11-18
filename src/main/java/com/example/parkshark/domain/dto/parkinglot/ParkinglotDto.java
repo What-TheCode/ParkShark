@@ -1,15 +1,11 @@
 package com.example.parkshark.domain.dto.parkinglot;
 
-import com.example.parkshark.domain.dto.address.AddressDto;
-import com.example.parkshark.domain.dto.person.PersonDto;
-
 public class ParkinglotDto {
     private int id;
     private String name;
     private int capacity;
-    private PersonDto contactPerson;
-    private AddressDto address;
-    private double pricePerHour;
+    private String telephone;
+    private String email;
 
     public int getId() {
         return id;
@@ -23,25 +19,20 @@ public class ParkinglotDto {
         return capacity;
     }
 
-    public PersonDto getContactPerson() {
-        return contactPerson;
+    public String getTelephone() {
+        return telephone;
     }
 
-    public AddressDto getAddress() {
-        return address;
-    }
-
-    public double getPricePerHour() {
-        return pricePerHour;
+    public String getEmail() {
+        return email;
     }
 
     public static class Builder {
         private int id;
         private String name;
         private int capacity;
-        private PersonDto contactPerson;
-        private AddressDto address;
-        private double pricePerHour;
+        private String telephone;
+        private String email;
 
         public Builder withId(int id) {
             this.id = id;
@@ -58,18 +49,13 @@ public class ParkinglotDto {
             return this;
         }
 
-        public Builder withContactPerson(PersonDto contactPerson) {
-            this.contactPerson = contactPerson;
+        public Builder withTelephone(String telephone) {
+            this.telephone = telephone;
             return this;
         }
 
-        public Builder withAddress(AddressDto address) {
-            this.address = address;
-            return this;
-        }
-
-        public Builder withPricePerHour(double pricePerHour) {
-            this.pricePerHour = pricePerHour;
+        public Builder withEmail(String email) {
+            this.email = email;
             return this;
         }
 
@@ -78,9 +64,8 @@ public class ParkinglotDto {
             parkinglotDto.id = this.id;
             parkinglotDto.name = this.name;
             parkinglotDto.capacity = this.capacity;
-            parkinglotDto.contactPerson = this.contactPerson;
-            parkinglotDto.address = this.address;
-            parkinglotDto.pricePerHour = pricePerHour;
+            parkinglotDto.telephone = this.telephone;
+            parkinglotDto.email = email;
             return parkinglotDto;
         }
     }
