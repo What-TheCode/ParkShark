@@ -5,9 +5,11 @@ import com.example.parkshark.domain.dto.member.CreateMemberWithPersonIdDto;
 import com.example.parkshark.domain.dto.member.MemberDto;
 import com.example.parkshark.domain.member.Member;
 import com.example.parkshark.domain.member.Membership;
+import com.example.parkshark.exceptions.InvalidIdException;
 import com.example.parkshark.exceptions.MemberDoesNotExistException;
 import com.example.parkshark.exceptions.MembershipDoesNotExistException;
 import com.example.parkshark.exceptions.PersonDoesNotExistException;
+import com.example.parkshark.helperClasses.NumericCheck;
 import com.example.parkshark.mapper.MemberMapper;
 import com.example.parkshark.repository.MemberRepository;
 import com.example.parkshark.repository.PersonRepository;
@@ -73,7 +75,11 @@ public class MemberService {
     }
 
     public MemberDto getById(String id) {
+        if(!NumericCheck.isInteger(id)) {
+            throw new InvalidIdException(String.format("Id %s not found.", id));
+        }
         int currentId = Integer.parseInt(id);
+
         Member member = this.memberRepository.findById(currentId).orElse(null);
 
         if (member == null) {

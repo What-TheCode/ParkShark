@@ -5,12 +5,12 @@ import com.example.parkshark.domain.dto.parkinglot.ParkinglotDetailDto;
 import com.example.parkshark.domain.dto.parkinglot.ParkinglotDto;
 import com.example.parkshark.domain.parkinglot.Parkinglot;
 import com.example.parkshark.exceptions.InvalidEmailException;
+import com.example.parkshark.exceptions.InvalidIdException;
 import com.example.parkshark.exceptions.InvalidTelephoneException;
 import com.example.parkshark.exceptions.ParkinglotDoesNotExistException;
+import com.example.parkshark.helperClasses.NumericCheck;
 import com.example.parkshark.mapper.ParkinglotMapper;
-import com.example.parkshark.repository.DivisionRepository;
 import com.example.parkshark.repository.ParkinglotRepository;
-import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -49,9 +48,13 @@ public class ParkinglotService {
         return parkinglotMapper.toDto(parkinglotRepository.findAll());
     }
 
-    public ParkinglotDetailDto getById(int id) {
-        Parkinglot parkinglot = parkinglotRepository.findById(id).orElse(null);
+    public ParkinglotDetailDto getById(String id) {
+        if(!NumericCheck.isInteger(id)) {
+            throw new InvalidIdException(String.format("Id %s not found.", id));
+        }
+        int currentId = Integer.parseInt(id);
 
+        Parkinglot parkinglot = parkinglotRepository.findById(currentId).orElse(null);
         if(parkinglot == null) {
             throw new ParkinglotDoesNotExistException(String.format("Parkinglot with id %s not found.", id));
         }
@@ -81,9 +84,7 @@ public class ParkinglotService {
     }
 
     private boolean hasValidTelephoneNumber(String telephone) {
-        try {
-            Integer.parseInt(telephone);
-        } catch (NumberFormatException ex) {
+        if(!NumericCheck.isInteger(telephone)) {
             return false;
         }
 
