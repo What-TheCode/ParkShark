@@ -1,6 +1,7 @@
 package com.example.parkshark.service;
 
 import com.example.parkshark.domain.dto.parkinglot.CreateParkinglotDto;
+import com.example.parkshark.domain.dto.parkinglot.ParkinglotDetailDto;
 import com.example.parkshark.domain.dto.parkinglot.ParkinglotDto;
 import com.example.parkshark.domain.parkinglot.Parkinglot;
 import com.example.parkshark.exceptions.InvalidEmailException;
@@ -47,7 +48,7 @@ public class ParkinglotService {
         return parkinglotMapper.toDto(parkinglotRepository.findAll());
     }
 
-    public ParkinglotDto getById(String id) {
+    public ParkinglotDetailDto getById(String id) {
         int currentId = Integer.parseInt(id);
         Parkinglot parkinglot = parkinglotRepository.findById(currentId).orElse(null);
 
@@ -55,7 +56,7 @@ public class ParkinglotService {
             throw new EntityNotFoundException("Parkinglot not found.");
         }
 
-        return parkinglotMapper.toDto(parkinglot);
+        return parkinglotMapper.toDetailDto(parkinglot);
     }
 
 
