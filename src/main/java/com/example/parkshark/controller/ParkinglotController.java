@@ -51,6 +51,11 @@ public class ParkinglotController {
     @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
     @ResponseStatus(HttpStatus.OK)
     public ParkinglotDetailDto getParkinglotById(@PathVariable("id") String id) {
-        return parkinglotService.getById(id);
+        try {
+            return parkinglotService.getById(id);
+        } catch (RuntimeException e) {
+            logger.warn("Parkinglot not found.");
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, e.getMessage());
+        }
     }
 }

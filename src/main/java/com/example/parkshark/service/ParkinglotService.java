@@ -6,6 +6,7 @@ import com.example.parkshark.domain.dto.parkinglot.ParkinglotDto;
 import com.example.parkshark.domain.parkinglot.Parkinglot;
 import com.example.parkshark.exceptions.InvalidEmailException;
 import com.example.parkshark.exceptions.InvalidTelephoneException;
+import com.example.parkshark.exceptions.ParkinglotDoesNotExistException;
 import com.example.parkshark.mapper.ParkinglotMapper;
 import com.example.parkshark.repository.DivisionRepository;
 import com.example.parkshark.repository.ParkinglotRepository;
@@ -53,7 +54,7 @@ public class ParkinglotService {
         Parkinglot parkinglot = parkinglotRepository.findById(currentId).orElse(null);
 
         if(parkinglot == null) {
-            throw new EntityNotFoundException("Parkinglot not found.");
+            throw new ParkinglotDoesNotExistException(String.format("Parkinglot with id %s not found.", id));
         }
 
         return parkinglotMapper.toDetailDto(parkinglot);
