@@ -1,15 +1,13 @@
 package com.example.parkshark.domain.address;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "postalcode")
 public class PostalCode {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "postal_code")
     private int postalCode;
 
