@@ -13,6 +13,7 @@ public class DivisionDto {
     private String name;
     private String originalName;
     private PersonDto director;
+    private Integer parentdivisionId;
 
     public DivisionDto() {
     }
@@ -34,6 +35,8 @@ public class DivisionDto {
         return director;
     }
 
+    public Integer getParentdivisionId(){return parentdivisionId; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -53,6 +56,7 @@ public class DivisionDto {
         private String name;
         private String originalName;
         private PersonDto director;
+        private Integer parentdivisionId;
 
 
         public Builder withId(int id) {
@@ -75,12 +79,18 @@ public class DivisionDto {
             return this;
         }
 
+        public Builder withParentDivisionId(Integer parentDivisionId){
+            this.parentdivisionId = parentDivisionId;
+            return this;
+        }
+
         public DivisionDto build() {
             DivisionDto divisionDto = new DivisionDto();
             divisionDto.id = this.id;
             divisionDto.name = this.name;
             divisionDto.originalName = this.originalName;
             divisionDto.director = this.director;
+            divisionDto.parentdivisionId = this.parentdivisionId;
 
             return divisionDto;
         }

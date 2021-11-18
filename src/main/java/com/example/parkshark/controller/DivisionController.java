@@ -26,10 +26,17 @@ public class DivisionController {
     }
 
     @GetMapping(produces = {"application/json"})
-    @ResponseStatus(HttpStatus.OK)
-    //    @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
-    public List<DivisionDto> getAllDivision(/*@RequestHeader String Authorization*/){
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
+    public List<DivisionDto> getAllDivision() {
         return divisionService.findAll();
+    }
+
+    @GetMapping(path = "/{divisionId}", produces = {"application/json"})
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
+    public DivisionDto getById(@PathVariable int divisionId) {
+        return divisionService.findById((divisionId));
     }
 
 }

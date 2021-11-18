@@ -26,6 +26,7 @@ public class DivisionMapper {
                 .withName(divisionDto.getName())
                 .withOriginalName(divisionDto.getOriginalName())
                 .withDirector(personMapper.toEntity(divisionDto.getDirector()))
+                .withParentdivision(divisionRepository.findById(divisionDto.getParentdivisionId()).orElse(null))
                 .build();
     }
 
@@ -34,6 +35,7 @@ public class DivisionMapper {
                 .withName(createDivisionDto.getName())
                 .withOriginalName(createDivisionDto.getOriginalName())
                 .withDirector(personMapper.toEntity(createDivisionDto.getDirector()))
+                .withParentdivision(divisionRepository.findById(createDivisionDto.getParentdivisionId()).orElse(null))
                 .build();
     }
 

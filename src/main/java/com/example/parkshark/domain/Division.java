@@ -1,6 +1,8 @@
 package com.example.parkshark.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -19,9 +21,9 @@ public class Division {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "director_id")
     private Person director;
-//    @ManyToOne
-//    @JoinColumn("id")
-//    private Division parentDivision;
+    @JoinColumn(name = "parentdivision_id")
+    @ManyToOne
+    private Division parentdivision;
 
     public Division() {
     }
@@ -55,6 +57,10 @@ public class Division {
         return director;
     }
 
+
+    public Division getParentdivision(){return parentdivision;}
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -74,6 +80,7 @@ public class Division {
         private String name;
         private String originalName;
         private Person director;
+        private Division parentdivision;
 
 
         public Division.Builder withId(int id) {
@@ -96,12 +103,18 @@ public class Division {
             return this;
         }
 
+        public Division.Builder withParentdivision(Division parentdivision){
+            this.parentdivision = parentdivision;
+            return this;
+        }
+
         public Division build() {
             Division division = new Division();
             division.id = this.id;
             division.name = this.name;
             division.originalName = this.originalName;
             division.director = this.director;
+            division.parentdivision=this.parentdivision;
 
             return division;
         }
