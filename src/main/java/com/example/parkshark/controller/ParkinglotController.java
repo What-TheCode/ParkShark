@@ -3,6 +3,7 @@ package com.example.parkshark.controller;
 import com.example.parkshark.domain.dto.parkinglot.CreateParkinglotDto;
 import com.example.parkshark.domain.dto.parkinglot.ParkinglotDetailDto;
 import com.example.parkshark.domain.dto.parkinglot.ParkinglotDto;
+import com.example.parkshark.security.switchsecure.SecurityGuard;
 import com.example.parkshark.service.ParkinglotService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,8 +27,8 @@ public class ParkinglotController {
         this.parkinglotService = parkinglotService;
     }
 
-    @PostMapping(MediaType.APPLICATION_JSON_VALUE)
-    // @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
     @ResponseStatus(HttpStatus.CREATED)
     public void createParkinglot(@RequestBody CreateParkinglotDto createParkinglotDto) {
         try {
@@ -39,14 +40,15 @@ public class ParkinglotController {
         }
     }
 
-    @GetMapping(MediaType.APPLICATION_JSON_VALUE)
-    // @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
     @ResponseStatus(HttpStatus.OK)
     public List<ParkinglotDto> getParkinglots() {
         return parkinglotService.getAll();
     }
 
-    @GetMapping(produces = "application/json", path = "/{id}")
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")
+    @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
     @ResponseStatus(HttpStatus.OK)
     public ParkinglotDetailDto getParkinglotById(@PathVariable("id") String id) {
         return parkinglotService.getById(id);

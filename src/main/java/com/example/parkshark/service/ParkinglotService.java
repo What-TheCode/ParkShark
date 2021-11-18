@@ -41,7 +41,7 @@ public class ParkinglotService {
         hasValidTelephone(createParkinglotDto.getContactPerson().getTelephone(),
                 createParkinglotDto.getContactPerson().getMobileTelephone());
 
-        this.parkinglotRepository.save(parkinglotMapper.toEntity(createParkinglotDto));
+        parkinglotRepository.save(parkinglotMapper.toEntity(createParkinglotDto));
     }
 
     public List<ParkinglotDto> getAll() {
@@ -88,7 +88,7 @@ public class ParkinglotService {
         }
 
         Phonenumber.PhoneNumber number = new Phonenumber.PhoneNumber();
-        number.setNationalNumber(Integer.valueOf(telephone));
+        number.setNationalNumber(Integer.parseInt(telephone));
         number.setCountryCode(32);
 
         PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
