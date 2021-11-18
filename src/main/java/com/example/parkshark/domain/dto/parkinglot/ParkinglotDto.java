@@ -1,13 +1,11 @@
 package com.example.parkshark.domain.dto.parkinglot;
 
-import org.springframework.stereotype.Component;
-
 public class ParkinglotDto {
     private int id;
     private String name;
     private int capacity;
+    private String telephone;
     private String email;
-    private String tel;
 
     public int getId() {
         return id;
@@ -21,20 +19,20 @@ public class ParkinglotDto {
         return capacity;
     }
 
-    public String getEmail() {
-        return email;
+    public String getTelephone() {
+        return telephone;
     }
 
-    public String getTel() {
-        return tel;
+    public String getEmail() {
+        return email;
     }
 
     public static class Builder {
         private int id;
         private String name;
         private int capacity;
+        private String telephone;
         private String email;
-        private String tel;
 
         public Builder withId(int id) {
             this.id = id;
@@ -51,13 +49,13 @@ public class ParkinglotDto {
             return this;
         }
 
-        public Builder withEmail(String email) {
-            this.email = email;
+        public Builder withTelephone(String telephone) {
+            this.telephone = telephone;
             return this;
         }
 
-        public Builder withTel(String tel) {
-            this.tel = tel;
+        public Builder withEmail(String email) {
+            this.email = email;
             return this;
         }
 
@@ -66,8 +64,8 @@ public class ParkinglotDto {
             parkinglotDto.id = this.id;
             parkinglotDto.name = this.name;
             parkinglotDto.capacity = this.capacity;
-            parkinglotDto.email = this.email;
-            parkinglotDto.tel = this.tel;
+            parkinglotDto.telephone = this.telephone;
+            parkinglotDto.email = email;
             return parkinglotDto;
         }
     }

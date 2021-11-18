@@ -1,6 +1,7 @@
 package com.example.parkshark.controller;
 
 import com.example.parkshark.domain.dto.parkinglot.CreateParkinglotDto;
+import com.example.parkshark.domain.dto.parkinglot.ParkinglotDetailDto;
 import com.example.parkshark.domain.dto.parkinglot.ParkinglotDto;
 import com.example.parkshark.service.ParkinglotService;
 import org.slf4j.Logger;
@@ -47,7 +48,7 @@ public class ParkinglotController {
 
     @GetMapping(produces = "application/json", path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ParkinglotDto getParkinglotById(@PathVariable("id") String id) {
+    public ParkinglotDetailDto getParkinglotById(@PathVariable("id") String id) {
         return parkinglotService.getById(id);
     }
 }
