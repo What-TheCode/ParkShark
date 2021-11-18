@@ -53,6 +53,21 @@ public class Parkinglot {
         this.pricePerHour = pricePerHour;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public Person getContactPerson() {
+        return contactPerson;
+    }
 
     public static class Builder {
 
