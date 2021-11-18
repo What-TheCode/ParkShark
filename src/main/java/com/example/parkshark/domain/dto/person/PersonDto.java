@@ -3,6 +3,7 @@ package com.example.parkshark.domain.dto.person;
 import com.example.parkshark.domain.Person;
 import com.example.parkshark.domain.address.Address;
 import com.example.parkshark.domain.dto.address.AddressDto;
+import org.springframework.stereotype.Component;
 
 public class PersonDto {
     private String firstName;

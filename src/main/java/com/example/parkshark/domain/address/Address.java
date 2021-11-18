@@ -1,7 +1,5 @@
 package com.example.parkshark.domain.address;
 
-import com.example.parkshark.domain.Person;
-
 import javax.persistence.*;
 
 @Entity
@@ -18,18 +16,13 @@ public class Address {
     @Column
     private int streetNumber;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-    @JoinColumn(name = "postal_code")
-    private PostalCode postalCode;
+    @Column
+    private int postalCode;
+
+    @Column
+    private String region;
 
     public Address() {
-
-    }
-
-    public Address(String streetName, int streetNumber, PostalCode postalCode) {
-        this.streetName = streetName;
-        this.streetNumber = streetNumber;
-        this.postalCode = postalCode;
     }
 
     public int getId() {
@@ -44,8 +37,12 @@ public class Address {
         return streetNumber;
     }
 
-    public PostalCode getPostalCode() {
+    public int getPostalCode() {
         return postalCode;
+    }
+
+    public String getRegion() {
+        return region;
     }
 
     public static class Builder {
@@ -53,7 +50,8 @@ public class Address {
         private int id;
         private String streetName;
         private int streetNumber;
-        private PostalCode postalCode;
+        private int postalCode;
+        private String region;
 
         public Builder withId(int id) {
             this.id = id;
@@ -70,8 +68,13 @@ public class Address {
             return this;
         }
 
-        public Builder withPostalCode(PostalCode postalCode) {
+        public Builder withPostalCode(int postalCode) {
             this.postalCode = postalCode;
+            return this;
+        }
+
+        public Builder withRegion(String region) {
+            this.region = region;
             return this;
         }
 
@@ -81,6 +84,7 @@ public class Address {
             address.streetName = this.streetName;
             address.streetNumber = this.streetNumber;
             address.postalCode = this.postalCode;
+            address.region = this.region;
 
             return address;
         }

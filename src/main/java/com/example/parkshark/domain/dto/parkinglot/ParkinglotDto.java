@@ -1,5 +1,7 @@
 package com.example.parkshark.domain.dto.parkinglot;
 
+import org.springframework.stereotype.Component;
+
 public class ParkinglotDto {
     private int id;
     private String name;

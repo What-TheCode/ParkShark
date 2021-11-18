@@ -1,6 +1,7 @@
 package com.example.parkshark.domain.dto.division;
 
 import com.example.parkshark.domain.dto.person.CreatePersonDto;
+import org.springframework.stereotype.Component;
 
 public class CreateDivisionDto {
     private String name;

@@ -8,17 +8,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class AddressMapper {
 
-    private PostalCodeMapper postalCodeMapper;
-
-    public AddressMapper(PostalCodeMapper postalCodeMapper) {
-        this.postalCodeMapper = postalCodeMapper;
-    }
-
     public Address toEntity(CreateAddressDto createAddressDto) {
         return new Address.Builder()
                 .withStreetName(createAddressDto.getStreetName())
                 .withStreetNumber(createAddressDto.getStreetNumber())
-                .withPostalCode(this.postalCodeMapper.toEntity(createAddressDto.getPostalCode()))
+                .withPostalCode(createAddressDto.getPostalCode())
+                .withRegion(createAddressDto.getRegion())
                 .build();
     }
 
@@ -26,7 +21,8 @@ public class AddressMapper {
         return new Address.Builder()
                 .withStreetName(addressDto.getStreetName())
                 .withStreetNumber(addressDto.getStreetNumber())
-                .withPostalCode(this.postalCodeMapper.toEntity(addressDto.getPostalCode()))
+                .withPostalCode(addressDto.getPostalCode())
+                .withRegion(addressDto.getRegion())
                 .build();
     }
 
@@ -34,7 +30,8 @@ public class AddressMapper {
         return new AddressDto.Builder()
                 .withStreetName(address.getStreetName())
                 .withStreetNumber(address.getStreetNumber())
-                .withPostalCodeDto(this.postalCodeMapper.toDto(address.getPostalCode()))
+                .withPostalCode(address.getPostalCode())
+                .withRegion(address.getRegion())
                 .build();
     }
 }

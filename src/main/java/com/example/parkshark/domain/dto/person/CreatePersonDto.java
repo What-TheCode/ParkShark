@@ -1,6 +1,7 @@
 package com.example.parkshark.domain.dto.person;
 
 import com.example.parkshark.domain.dto.address.CreateAddressDto;
+import org.springframework.stereotype.Component;
 
 public class CreatePersonDto {
 

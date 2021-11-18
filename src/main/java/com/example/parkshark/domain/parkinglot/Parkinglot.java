@@ -1,6 +1,5 @@
 package com.example.parkshark.domain.parkinglot;
 
-import com.example.parkshark.domain.Division;
 import com.example.parkshark.domain.Person;
 import com.example.parkshark.domain.address.Address;
 
@@ -24,11 +23,11 @@ public class Parkinglot {
     @Column
     private int capacity;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "contact_person_id")
     private Person contactPerson;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "address_id")
     private Address address;
 
@@ -63,6 +62,10 @@ public class Parkinglot {
 
     public int getCapacity() {
         return capacity;
+    }
+
+    public Address getAddress() {
+        return address;
     }
 
     public Person getContactPerson() {

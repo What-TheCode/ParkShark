@@ -3,7 +3,9 @@ package com.example.parkshark.domain.dto.parkinglot;
 import com.example.parkshark.domain.dto.address.CreateAddressDto;
 import com.example.parkshark.domain.dto.person.CreatePersonDto;
 import com.example.parkshark.domain.parkinglot.ParkinglotCategory;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CreateParkinglotDto {
 
     private String name;
@@ -14,6 +16,9 @@ public class CreateParkinglotDto {
     private double pricePerHour;
 //    private int divisionId;
 
+
+    public CreateParkinglotDto() {
+    }
 
     public CreateParkinglotDto(String name, ParkinglotCategory category, int capacity, CreatePersonDto contactPerson, CreateAddressDto address, double pricePerHour) {
         this.name = name;
@@ -46,5 +51,9 @@ public class CreateParkinglotDto {
 
     public double getPricePerHour() {
         return pricePerHour;
+    }
+
+    public void setAddress(CreateAddressDto address) {
+        this.address = address;
     }
 }

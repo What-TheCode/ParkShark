@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -20,10 +19,12 @@ public class ParkinglotService {
     private final ParkinglotMapper parkinglotMapper;
 
     @Autowired
-    public ParkinglotService(ParkinglotRepository parkinglotRepository, ParkinglotMapper parkinglotMapper) {
+    public ParkinglotService(ParkinglotRepository parkinglotRepository,
+                             ParkinglotMapper parkinglotMapper) {
         this.parkinglotRepository = parkinglotRepository;
         this.parkinglotMapper = parkinglotMapper;
     }
+
 
     public void createParkinglot(CreateParkinglotDto createParkinglotDto) {
         this.parkinglotRepository.save(parkinglotMapper.toEntity(createParkinglotDto));
