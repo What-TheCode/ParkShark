@@ -50,7 +50,7 @@ public class ParkinglotController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")
     @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
     @ResponseStatus(HttpStatus.OK)
-    public ParkinglotDetailDto getParkinglotById(@PathVariable("id") String id) {
+    public ParkinglotDetailDto getParkinglotById(@PathVariable("id") int id) {
         return parkinglotService.getById(id);
     }
 }
