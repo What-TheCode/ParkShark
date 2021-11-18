@@ -72,6 +72,10 @@ public class Parkinglot {
         return contactPerson;
     }
 
+    public double getPricePerHour() {
+        return pricePerHour;
+    }
+
     public static class Builder {
 
         private int id;
@@ -103,7 +107,7 @@ public class Parkinglot {
         }
 
         public Builder withContactPerson(Person person) {
-            this.contactPerson = contactPerson;
+            this.contactPerson = person;
             return this;
         }
 

@@ -35,8 +35,9 @@ public class ParkinglotMapper {
                 .withId(parkinglot.getId())
                 .withName(parkinglot.getName())
                 .withCapacity(parkinglot.getCapacity())
-                .withEmail(parkinglot.getContactPerson().getEmail())
-                .withTel(parkinglot.getContactPerson().getTelephone())
+                .withContactPerson(personMapper.toDto(parkinglot.getContactPerson()))
+                .withAddress(addressMapper.toDto(parkinglot.getAddress()))
+                .withPricePerHour(parkinglot.getPricePerHour())
                 .build();
     }
 
