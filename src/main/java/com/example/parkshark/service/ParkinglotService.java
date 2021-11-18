@@ -3,12 +3,19 @@ package com.example.parkshark.service;
 import com.example.parkshark.domain.dto.parkinglot.CreateParkinglotDto;
 import com.example.parkshark.domain.dto.parkinglot.ParkinglotDto;
 import com.example.parkshark.domain.parkinglot.Parkinglot;
+import com.example.parkshark.exceptions.InvalidEmailException;
+import com.example.parkshark.exceptions.InvalidTelephoneException;
 import com.example.parkshark.mapper.ParkinglotMapper;
 import com.example.parkshark.repository.ParkinglotRepository;
+import com.google.i18n.phonenumbers.NumberParseException;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.i18n.phonenumbers.Phonenumber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import java.util.List;
 
 @Service
@@ -27,6 +34,10 @@ public class ParkinglotService {
 
 
     public void createParkinglot(CreateParkinglotDto createParkinglotDto) {
+        hasValidEmailAddress(createParkinglotDto.getContactPerson().getEmail());
+        hasValidTelephone(createParkinglotDto.getContactPerson().getTelephone(),
+                createParkinglotDto.getContactPerson().getMobileTelephone());
+
         this.parkinglotRepository.save(parkinglotMapper.toEntity(createParkinglotDto));
     }
 
@@ -38,5 +49,43 @@ public class ParkinglotService {
         int currentId = Integer.parseInt(id);
         Parkinglot parkinglot = parkinglotRepository.findById(currentId).orElseThrow();
         return parkinglotMapper.toDto(parkinglot);
+    }
+
+
+    //HELPER METHODS
+    private void hasValidEmailAddress(String emailaddress) {
+        try {
+            InternetAddress emailAddr = new InternetAddress(emailaddress);
+            emailAddr.validate();
+        } catch (AddressException ex) {
+            throw new InvalidEmailException("Not a valid emailaddress.");
+        }
+    }
+
+    private void hasValidTelephone(String telephone, String mobileTelephone) {
+        if (telephone == null && mobileTelephone == null) {
+            throw new InvalidTelephoneException("Contactperson should have at least one telephone number.");
+        }
+
+        if (!hasValidTelephoneNumber(telephone) && !hasValidTelephoneNumber(mobileTelephone)) {
+            throw new InvalidTelephoneException("Telephone number not valid");
+        }
+    }
+
+    private boolean hasValidTelephoneNumber(String telephone) {
+        try {
+            Integer.parseInt(telephone);
+        } catch (NumberFormatException ex) {
+            return false;
+        }
+
+        Phonenumber.PhoneNumber number = new Phonenumber.PhoneNumber();
+        number.setNationalNumber(Integer.valueOf(telephone));
+        number.setCountryCode(32);
+
+        PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
+        phoneUtil.isPossibleNumberForType(number, PhoneNumberUtil.PhoneNumberType.FIXED_LINE_OR_MOBILE);
+
+        return phoneUtil.isPossibleNumber(number);
     }
 }

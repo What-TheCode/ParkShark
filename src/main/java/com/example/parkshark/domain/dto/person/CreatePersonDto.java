@@ -9,13 +9,15 @@ public class CreatePersonDto {
     private String lastName;
     private CreateAddressDto createAddressDTO;
     private String telephone;
+    private String mobileTelephone;
     private String email;
 
-    public CreatePersonDto(String firstName, String lastName, CreateAddressDto createAddressDTO, String telephone, String email) {
+    public CreatePersonDto(String firstName, String lastName, CreateAddressDto createAddressDTO, String telephone, String mobileTelephone, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.createAddressDTO = createAddressDTO;
         this.telephone = telephone;
+        this.mobileTelephone = mobileTelephone;
         this.email = email;
     }
 
@@ -33,6 +35,10 @@ public class CreatePersonDto {
 
     public String getTelephone() {
         return telephone;
+    }
+
+    public String getMobileTelephone() {
+        return mobileTelephone;
     }
 
     public String getEmail() {
