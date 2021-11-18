@@ -1,7 +1,10 @@
 package com.example.parkshark.domain.dto.division;
 
 
+import com.example.parkshark.domain.Division;
 import com.example.parkshark.domain.dto.person.PersonDto;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.lang.Nullable;
 
 import java.util.Objects;
 

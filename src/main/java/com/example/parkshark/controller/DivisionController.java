@@ -20,9 +20,8 @@ public class DivisionController {
 
     @PostMapping(consumes = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
-//    @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
-    public void createDivision(@RequestBody CreateDivisionDto createDivisionDto/*,
-                               @RequestHeader String Authorization*/ ){
+    @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
+    public void createDivision(@RequestBody CreateDivisionDto createDivisionDto) {
         divisionService.saveDivision(createDivisionDto);
     }
 

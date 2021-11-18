@@ -11,7 +11,7 @@ public class Division {
     @Id
     @SequenceGenerator(name = "division_id_seq", sequenceName = "division_id_seq", initialValue = 1, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "division_id_seq")
-    private int id;
+    private Integer id;
     @Column(name = "name")
     private String name;
     @Column(name = "original_name")
@@ -39,7 +39,7 @@ public class Division {
         this.director = director;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
