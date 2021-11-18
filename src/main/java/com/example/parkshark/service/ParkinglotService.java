@@ -49,9 +49,8 @@ public class ParkinglotService {
         return parkinglotMapper.toDto(parkinglotRepository.findAll());
     }
 
-    public ParkinglotDetailDto getById(String id) {
-        int currentId = Integer.parseInt(id);
-        Parkinglot parkinglot = parkinglotRepository.findById(currentId).orElse(null);
+    public ParkinglotDetailDto getById(int id) {
+        Parkinglot parkinglot = parkinglotRepository.findById(id).orElse(null);
 
         if(parkinglot == null) {
             throw new ParkinglotDoesNotExistException(String.format("Parkinglot with id %s not found.", id));
