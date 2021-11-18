@@ -1,22 +1,34 @@
 package com.example.parkshark.domain.dto.division;
 
+
 import com.example.parkshark.domain.dto.person.PersonDto;
-import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
 public class DivisionDto {
     private int id;
     private String name;
-    private String fullName;
-    private PersonDto directorId;
+    private String originalName;
+    private PersonDto director;
 
-    public DivisionDto(int id, String name, String fullName, PersonDto directorId) {
-        this.id = id;
+    public DivisionDto() {
     }
+
 
     public int getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getOriginalName() {
+        return originalName;
+    }
+
+    public PersonDto getDirector() {
+        return director;
     }
 
     @Override
@@ -30,5 +42,44 @@ public class DivisionDto {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public static class Builder {
+
+        private int id;
+        private String name;
+        private String originalName;
+        private PersonDto director;
+
+
+        public Builder withId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder withOriginalName(String originalName) {
+            this.originalName = originalName;
+            return this;
+        }
+
+        public Builder withDirector(PersonDto director) {
+            this.director = director;
+            return this;
+        }
+
+        public DivisionDto build() {
+            DivisionDto divisionDto = new DivisionDto();
+            divisionDto.id = this.id;
+            divisionDto.name = this.name;
+            divisionDto.originalName = this.originalName;
+            divisionDto.director = this.director;
+
+            return divisionDto;
+        }
     }
 }

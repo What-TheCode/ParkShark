@@ -1,5 +1,6 @@
 package com.example.parkshark.service;
 
+import com.example.parkshark.domain.Division;
 import com.example.parkshark.domain.dto.division.CreateDivisionDto;
 import com.example.parkshark.domain.dto.division.DivisionDto;
 import com.example.parkshark.mapper.DivisionMapper;
@@ -27,5 +28,12 @@ public class DivisionService {
 
     public void saveDivision(CreateDivisionDto createDivisionDto){
         divisionRepository.save(divisionMapper.toEntity(createDivisionDto));
+    }
+
+    public DivisionDto findById(int id){
+        if(divisionRepository.findById(id).isEmpty()){
+            throw new IllegalArgumentException("There is no division with this id.");
+        }
+        return divisionMapper.toDto(divisionRepository.getById(id));
     }
 }

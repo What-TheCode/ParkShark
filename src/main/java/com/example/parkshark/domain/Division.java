@@ -1,6 +1,6 @@
 package com.example.parkshark.domain;
 
-import com.example.parkshark.domain.address.Address;
+
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -19,6 +19,9 @@ public class Division {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "director_id")
     private Person director;
+//    @ManyToOne
+//    @JoinColumn("id")
+//    private Division parentDivision;
 
     public Division() {
     }
