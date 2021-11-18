@@ -1,11 +1,13 @@
 package com.example.parkshark.service;
 
 import com.example.parkshark.domain.dto.parkinglot.CreateParkinglotDto;
+import com.example.parkshark.domain.dto.parkinglot.ParkinglotDetailDto;
 import com.example.parkshark.domain.dto.parkinglot.ParkinglotDto;
 import com.example.parkshark.domain.parkinglot.Parkinglot;
 import com.example.parkshark.exceptions.InvalidEmailException;
 import com.example.parkshark.exceptions.InvalidTelephoneException;
 import com.example.parkshark.mapper.ParkinglotMapper;
+import com.example.parkshark.repository.DivisionRepository;
 import com.example.parkshark.repository.ParkinglotRepository;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
@@ -16,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -45,10 +48,15 @@ public class ParkinglotService {
         return parkinglotMapper.toDto(parkinglotRepository.findAll());
     }
 
-    public ParkinglotDto getById(String id) {
+    public ParkinglotDetailDto getById(String id) {
         int currentId = Integer.parseInt(id);
-        Parkinglot parkinglot = parkinglotRepository.findById(currentId).orElseThrow();
-        return parkinglotMapper.toDto(parkinglot);
+        Parkinglot parkinglot = parkinglotRepository.findById(currentId).orElse(null);
+
+        if(parkinglot == null) {
+            throw new EntityNotFoundException("Parkinglot not found.");
+        }
+
+        return parkinglotMapper.toDetailDto(parkinglot);
     }
 
 

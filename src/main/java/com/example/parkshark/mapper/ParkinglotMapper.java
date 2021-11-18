@@ -1,6 +1,7 @@
 package com.example.parkshark.mapper;
 
 import com.example.parkshark.domain.dto.parkinglot.CreateParkinglotDto;
+import com.example.parkshark.domain.dto.parkinglot.ParkinglotDetailDto;
 import com.example.parkshark.domain.dto.parkinglot.ParkinglotDto;
 import com.example.parkshark.domain.parkinglot.Parkinglot;
 import org.springframework.stereotype.Component;
@@ -32,6 +33,16 @@ public class ParkinglotMapper {
 
     public ParkinglotDto toDto(Parkinglot parkinglot) {
         return new ParkinglotDto.Builder()
+                .withId(parkinglot.getId())
+                .withName(parkinglot.getName())
+                .withCapacity(parkinglot.getCapacity())
+                .withTelephone(parkinglot.getContactPerson().getTelephone())
+                .withEmail(parkinglot.getContactPerson().getEmail())
+                .build();
+    }
+
+    public ParkinglotDetailDto toDetailDto(Parkinglot parkinglot) {
+        return new ParkinglotDetailDto.Builder()
                 .withId(parkinglot.getId())
                 .withName(parkinglot.getName())
                 .withCapacity(parkinglot.getCapacity())
