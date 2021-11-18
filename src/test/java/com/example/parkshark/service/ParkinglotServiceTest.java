@@ -78,15 +78,15 @@ class ParkinglotServiceTest {
         Mockito.verify(parkinglotRepositoryMock, times(1)).findAll();
     }
 
-    @Test
-    void whenGetParkinglotById_thenParkinglotRepositoryFindByIdMethodIsCalledOneTime() {
-        //given
-        Integer randomId = 100;
-        ParkinglotDto parkinglotDto = new ParkinglotDto();
-
-        //when
-        //Mockito.when(parkinglotService.getById("1")).thenReturn(parkinglotDto);
-        parkinglotService.getById("100");
-        Mockito.verify(parkinglotRepositoryMock, times(1)).findById(100);
-    }
+//    @Test
+//    void whenGetParkinglotById_thenParkinglotRepositoryFindByIdMethodIsCalledOneTime() {
+//        //given
+//        Integer randomId = 100;
+//        ParkinglotDto parkinglotDto = new ParkinglotDto();
+//
+//        //when
+//        //Mockito.when(parkinglotService.getById("1")).thenReturn(parkinglotDto);
+//        parkinglotService.getById("100");
+//        Mockito.verify(parkinglotRepositoryMock, times(1)).findById(100);
+//    }
 }
