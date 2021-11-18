@@ -64,6 +64,10 @@ public class Parkinglot {
         return capacity;
     }
 
+    public ParkinglotCategory getCategory() {
+        return category;
+    }
+
     public Address getAddress() {
         return address;
     }
