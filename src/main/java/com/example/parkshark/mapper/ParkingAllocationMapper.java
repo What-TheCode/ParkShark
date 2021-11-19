@@ -45,6 +45,7 @@ public class ParkingAllocationMapper {
 
     public ParkingAllocationDto toDto(ParkingAllocation parkingAllocation) {
         return new ParkingAllocationDto.Builder()
+                .withId(parkingAllocation.getId())
                 .withMemberId(memberMapper.toDto(parkingAllocation.getMember()).getId())
                 .withParkinglotId(parkinglotMapper.toDto(parkingAllocation.getParkinglot()).getId())
                 .withLicensePlate(parkingAllocation.getLicensePlate())
