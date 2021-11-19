@@ -112,6 +112,10 @@ public class ParkinglotService {
     }
 
     public void hasValidCategory(String category) {
+        if(category == null) {
+            throw new EmptyParkinglotCategoryException("Parkinglot has to be chosen.");
+        }
+
         if (!category.trim().equalsIgnoreCase(ParkinglotCategory.UNDERGROUND.getType())
                 && !category.trim().equalsIgnoreCase(ParkinglotCategory.ABOVEGROUND.getType()))
         {
