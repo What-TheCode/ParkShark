@@ -38,6 +38,18 @@ public class ParkinglotMapper {
                 .build();
     }
 
+    public Parkinglot toEntity(ParkinglotDetailDto parkinglotDetailDto) {
+        return new Parkinglot.Builder()
+                .withId(parkinglotDetailDto.getId())
+                .withName(parkinglotDetailDto.getName())
+                .withCapacity(parkinglotDetailDto.getCapacity())
+                .withContactPerson(this.personMapper.toEntity(parkinglotDetailDto.getContactPerson()))
+                .withAddress(this.addressMapper.toEntity(parkinglotDetailDto.getAddress()))
+                .withPricePerHour(parkinglotDetailDto.getPricePerHour())
+                .withDivision(this.divisionMapper.toEntity(parkinglotDetailDto.getDivisionDto()))
+                .build();
+    }
+
     public ParkinglotDto toDto(Parkinglot parkinglot) {
         return new ParkinglotDto.Builder()
                 .withId(parkinglot.getId())

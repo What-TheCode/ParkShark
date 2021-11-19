@@ -2,6 +2,7 @@ package com.example.parkshark.mapper;
 
 import com.example.parkshark.domain.Person;
 import com.example.parkshark.domain.dto.member.CreateMemberDto;
+import com.example.parkshark.domain.dto.member.CreateMemberWithPersonDto;
 import com.example.parkshark.domain.dto.member.MemberDto;
 import com.example.parkshark.domain.member.Member;
 import com.example.parkshark.domain.member.Membership;
@@ -28,6 +29,24 @@ public class MemberMapper {
                 .withLicensePlate(licensePlateMapper.toEntity(createMemberDto.getCreateLicensePlateDto()))
                 .withRegistrationDate(LocalDateTime.now())
                 .withMembershipLevel(Membership.valueOf(createMemberDto.getMembershipLevel().trim().toUpperCase()))
+                .build();
+    }
+
+    public Member toEntity(CreateMemberWithPersonDto createMemberDto) {
+        return new Member.Builder()
+                .withPerson(createMemberDto.getPerson())
+                .withLicensePlate(licensePlateMapper.toEntity(createMemberDto.getCreateLicensePlateDto()))
+                .withRegistrationDate(LocalDateTime.now())
+                .withMembershipLevel(createMemberDto.getMembershipLevel())
+                .build();
+    }
+
+    public Member toEntity(MemberDto memberDto) {
+        return new Member.Builder()
+                .withPerson(this.personMapper.toEntity(memberDto.getPerson()))
+                .withLicensePlate(this.licensePlateMapper.toEntity(memberDto.getLicensePlateDto()))
+                .withRegistrationDate(LocalDateTime.now())
+                .withMembershipLevel(Membership.valueOf(memberDto.getMembershipLevel()))
                 .build();
     }
 

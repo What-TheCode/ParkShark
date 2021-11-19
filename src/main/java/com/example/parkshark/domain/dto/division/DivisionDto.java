@@ -18,6 +18,9 @@ public class DivisionDto {
     public DivisionDto() {
     }
 
+    public int getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
