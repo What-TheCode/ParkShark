@@ -18,12 +18,15 @@ class ParkSharkApplicationTests {
     private DivisionController divisionController;
     private ParkinglotController parkinglotController;
     private MemberController memberController;
+//    private InvoiceController invoiceController;
 
     @Autowired
-    public ParkSharkApplicationTests(DivisionController divisionController, ParkinglotController parkinglotController, MemberController memberController) {
+    public ParkSharkApplicationTests(DivisionController divisionController, ParkinglotController parkinglotController, MemberController memberController
+            /*,InvoiceController invoiceController*/ ) {
         this.divisionController = divisionController;
         this.parkinglotController = parkinglotController;
         this.memberController = memberController;
+//        this.invoiceController = invoiceController;
     }
 
     @Test
@@ -31,6 +34,7 @@ class ParkSharkApplicationTests {
         Assertions.assertThat(divisionController).isNotNull();
         Assertions.assertThat(parkinglotController).isNotNull();
         Assertions.assertThat(memberController).isNotNull();
+//        Assertions.assertThat(invoiceController).isNotNull();
 
     }
 }
