@@ -10,17 +10,20 @@ public class PersonDto {
     private String lastName;
     private AddressDto addressDto;
     private String telephone;
+    private String mobileTelephone;
     private String email;
 
     private PersonDto() {
 
     }
 
-    public PersonDto(String firstName, String lastName, AddressDto addressDTO, String telephone, String email) {
+    public PersonDto(String firstName, String lastName, AddressDto addressDto,
+                     String telephone, String mobileTelephone, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
-        addressDto = addressDTO;
+        this.addressDto = addressDto;
         this.telephone = telephone;
+        this.mobileTelephone = mobileTelephone;
         this.email = email;
     }
 
@@ -40,6 +43,10 @@ public class PersonDto {
         return telephone;
     }
 
+    public String getMobileTelephone() {
+        return mobileTelephone;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -51,6 +58,7 @@ public class PersonDto {
         private String lastName;
         private AddressDto addressDto;
         private String telephone;
+        private String mobileTelephone;
         private String email;
 
 
@@ -74,6 +82,11 @@ public class PersonDto {
             return this;
         }
 
+        public Builder withMobileTelephone(String mobileTelephone) {
+            this.mobileTelephone = mobileTelephone;
+            return this;
+        }
+
         public Builder withEmail(String email) {
             this.email = email;
             return this;
@@ -85,6 +98,7 @@ public class PersonDto {
             personDto.lastName = this.lastName;
             personDto.addressDto = this.addressDto;
             personDto.telephone = this.telephone;
+            personDto.mobileTelephone = this.mobileTelephone;
             personDto.email = this.email;
 
             return personDto;

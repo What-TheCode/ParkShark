@@ -1,7 +1,7 @@
 package com.example.parkshark.service;
 
-import com.example.parkshark.domain.dto.member.CreateMemberWithPersonDto;
-import com.example.parkshark.domain.dto.member.CreateMemberWithPersonIdDto;
+import com.example.parkshark.domain.Person;
+import com.example.parkshark.domain.dto.member.CreateMemberDto;
 import com.example.parkshark.domain.dto.member.MemberDto;
 import com.example.parkshark.domain.member.Member;
 import com.example.parkshark.domain.member.Membership;
@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -39,17 +38,12 @@ public class MemberService {
     }
 
 
-    public void createMember(CreateMemberWithPersonIdDto createMemberDto) {
+    public void createMember(CreateMemberDto createMemberDto) {
         inputValidation(createMemberDto);
 
-        CreateMemberWithPersonDto createMemberWithPersonDto = new CreateMemberWithPersonDto(
-                this.personRepository.getById(createMemberDto.getPersonId()),
-                createMemberDto.getCreateLicensePlateDto(),
-                LocalDateTime.now(),
-                Membership.valueOf(createMemberDto.getMembershipLevel().toUpperCase())
-        );
+        Person person = this.personRepository.getById(createMemberDto.getPersonId());
 
-        this.memberRepository.save(this.memberMapper.toEntity(createMemberWithPersonDto));
+        this.memberRepository.save(this.memberMapper.toEntity(createMemberDto, person));
         logger.info("Member created.");
     }
 
@@ -74,13 +68,13 @@ public class MemberService {
 
 
     //HELPER METHODS
-    private void inputValidation(CreateMemberWithPersonIdDto createMemberDto) {
+    private void inputValidation(CreateMemberDto createMemberDto) {
         hasPersonId(createMemberDto);
         isNotAMember(createMemberDto);
         hasCorrectMembershipLevel(createMemberDto);
     }
 
-    private void hasPersonId(CreateMemberWithPersonIdDto createMemberDto) {
+    private void hasPersonId(CreateMemberDto createMemberDto) {
         if (this.personRepository.findById(createMemberDto.getPersonId()).isEmpty()) {
             logger.warn("Member not created.");
             throw new PersonDoesNotExistException(
@@ -88,7 +82,7 @@ public class MemberService {
         }
     }
 
-    private void isNotAMember(CreateMemberWithPersonIdDto createMemberDto) {
+    private void isNotAMember(CreateMemberDto createMemberDto) {
         if (this.memberRepository.findByPersonId(createMemberDto.getPersonId()).isPresent()) {
             logger.warn("Member not created.");
             throw new MemberAlreadyExistException(
@@ -96,7 +90,7 @@ public class MemberService {
         }
     }
 
-    private void hasCorrectMembershipLevel(CreateMemberWithPersonIdDto createMemberDto) {
+    private void hasCorrectMembershipLevel(CreateMemberDto createMemberDto) {
         String membershipLevel = createMemberDto.getMembershipLevel();
         if (!membershipLevel.trim().equalsIgnoreCase(Membership.BRONZE.getValue())
                 && !membershipLevel.trim().equalsIgnoreCase(Membership.SILVER.getValue())

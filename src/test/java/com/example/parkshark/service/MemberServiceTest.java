@@ -1,22 +1,5 @@
 package com.example.parkshark.service;
 
-import com.example.parkshark.domain.Person;
-import com.example.parkshark.domain.address.Address;
-import com.example.parkshark.domain.dto.member.CreateLicensePlateDto;
-import com.example.parkshark.domain.dto.member.CreateMemberWithPersonIdDto;
-import com.example.parkshark.domain.member.Membership;
-import com.example.parkshark.exceptions.PersonDoesNotExistException;
-import com.example.parkshark.mapper.MemberMapper;
-import com.example.parkshark.repository.MemberRepository;
-import com.example.parkshark.repository.PersonRepository;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
-import java.time.LocalDateTime;
-
 class MemberServiceTest {
 //
 //    private MemberService memberService;

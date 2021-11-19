@@ -1,6 +1,6 @@
 package com.example.parkshark.controller;
 
-import com.example.parkshark.domain.dto.member.CreateMemberWithPersonIdDto;
+import com.example.parkshark.domain.dto.member.CreateMemberDto;
 import com.example.parkshark.domain.dto.member.MemberDto;
 import com.example.parkshark.security.switchsecure.SecurityGuard;
 import com.example.parkshark.service.MemberService;
@@ -8,9 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -30,7 +28,7 @@ public class MemberController {
     @PostMapping(consumes = "application/json")
     @SecurityGuard(SecurityGuard.ApiUserRole.MEMBER)
     @ResponseStatus(HttpStatus.CREATED)
-    public void createMember(@RequestBody CreateMemberWithPersonIdDto createMemberDto) {
+    public void createMember(@RequestBody CreateMemberDto createMemberDto) {
             memberService.createMember(createMemberDto);
             logger.info("Member created");
     }

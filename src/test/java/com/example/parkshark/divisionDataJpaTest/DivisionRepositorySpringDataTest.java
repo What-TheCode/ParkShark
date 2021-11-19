@@ -22,7 +22,15 @@ class DivisionRepositorySpringDataTest {
             .withPostalCode(3520)
             .withRegion("Zonhoven")
             .build();
-    Person testPerson = new Person("Ralph","Put",testAdres,"0114255","rapit@hotm.com");
+
+    Person testPerson = new Person.Builder()
+            .withFirstName("Ralph")
+            .withLastName("Put")
+            .withAddress(testAdres)
+            .withTelephone("0112354896")
+            .withMobileTelephone("0497654321")
+            .withEmail("rapit@hotm.com")
+            .build();
 
     Division testDivision = new Division.Builder()
             .withName("Garage")

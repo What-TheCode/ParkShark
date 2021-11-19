@@ -1,11 +1,13 @@
 package com.example.parkshark.mapper;
 
-import com.example.parkshark.domain.dto.member.CreateMemberWithPersonDto;
-import com.example.parkshark.domain.dto.member.CreateMemberWithPersonIdDto;
+import com.example.parkshark.domain.Person;
+import com.example.parkshark.domain.dto.member.CreateMemberDto;
 import com.example.parkshark.domain.dto.member.MemberDto;
 import com.example.parkshark.domain.member.Member;
+import com.example.parkshark.domain.member.Membership;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,17 +15,19 @@ import java.util.stream.Collectors;
 public class MemberMapper {
 
     private final LicensePlateMapper licensePlateMapper;
+    private final PersonMapper personMapper;
 
-    public MemberMapper(LicensePlateMapper licensePlateMapper) {
+    public MemberMapper(LicensePlateMapper licensePlateMapper, PersonMapper personMapper) {
         this.licensePlateMapper = licensePlateMapper;
+        this.personMapper = personMapper;
     }
 
-    public Member toEntity(CreateMemberWithPersonDto createMemberDto) {
+    public Member toEntity(CreateMemberDto createMemberDto, Person person) {
         return new Member.Builder()
-                .withPerson(createMemberDto.getPerson())
+                .withPerson(person)
                 .withLicensePlate(licensePlateMapper.toEntity(createMemberDto.getCreateLicensePlateDto()))
-                .withRegistrationDate(createMemberDto.getRegistrationDate())
-                .withMembershipLevel(createMemberDto.getMembershipLevel())
+                .withRegistrationDate(LocalDateTime.now())
+                .withMembershipLevel(Membership.valueOf(createMemberDto.getMembershipLevel().trim().toUpperCase()))
                 .build();
     }
 
@@ -36,7 +40,7 @@ public class MemberMapper {
     public MemberDto toDto(Member member) {
         return new MemberDto(
                 member.getId(),
-                member.getPerson(),
+                this.personMapper.toDto(member.getPerson()),
                 this.licensePlateMapper.toDto(member.getLicensePlate()),
                 member.getRegistrationDate(),
                 member.getMembershipLevel().getValue()

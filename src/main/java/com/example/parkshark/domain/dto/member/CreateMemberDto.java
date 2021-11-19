@@ -4,13 +4,13 @@ import com.example.parkshark.domain.member.Membership;
 
 import java.time.LocalDateTime;
 
-public class CreateMemberWithPersonIdDto {
+public class CreateMemberDto {
 
     private int personId;
     private CreateLicensePlateDto createLicensePlateDto;
     private String membershipLevel;
 
-    public CreateMemberWithPersonIdDto(int personId, CreateLicensePlateDto createLicensePlateDto, String membershipLevel) {
+    public CreateMemberDto(int personId, CreateLicensePlateDto createLicensePlateDto, String membershipLevel) {
         this.personId = personId;
         this.createLicensePlateDto = createLicensePlateDto;
         this.membershipLevel = membershipLevel;

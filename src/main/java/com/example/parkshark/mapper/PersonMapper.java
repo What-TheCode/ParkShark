@@ -20,6 +20,7 @@ public class PersonMapper {
                 .withLastName(createPersonDto.getLastName())
                 .withAddress(this.addressMapper.toEntity(createPersonDto.getCreateAddressDTO()))
                 .withTelephone(createPersonDto.getTelephone())
+                .withMobileTelephone(createPersonDto.getMobileTelephone())
                 .withEmail(createPersonDto.getEmail())
                 .build();
     }
@@ -30,6 +31,7 @@ public class PersonMapper {
                 .withLastName(personDto.getLastName())
                 .withAddress(this.addressMapper.toEntity(personDto.getAddressDto()))
                 .withTelephone(personDto.getTelephone())
+                .withMobileTelephone(personDto.getMobileTelephone())
                 .withEmail(personDto.getEmail())
                 .build();
     }
@@ -40,6 +42,7 @@ public class PersonMapper {
                 .withLastName(person.getLastName())
                 .withAddress(this.addressMapper.toDto(person.getAddress()))
                 .withTelephone(person.getTelephone())
+                .withMobileTelephone(person.getMobileTelephone())
                 .withEmail(person.getEmail())
                 .build();
     }
