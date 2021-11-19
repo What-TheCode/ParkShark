@@ -25,15 +25,14 @@ public class ParkingAllocationController {
     @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
     @ResponseStatus(HttpStatus.OK)
     public List<ParkingAllocationDto> getAllocations(@RequestParam(required = false) Boolean isActive) {
-        return null;
-        // return parkingAllocationService.getAll(isActive);
+        return parkingAllocationService.findAll(isActive);
     }
 
     @PostMapping(consumes = "application/json")
     @SecurityGuard(SecurityGuard.ApiUserRole.MEMBER)
     @ResponseStatus(HttpStatus.CREATED)
     public void startAllocation(@RequestBody CreateParkingAllocationDto createParkingAllocationDto) {
-        // parkingAllocationService.startAllocation(createParkingAllocationDto);
+        parkingAllocationService.saveParkingAllocation(createParkingAllocationDto);
     }
 
     @PutMapping(consumes = "application/json", path = "/{id}")
@@ -41,6 +40,6 @@ public class ParkingAllocationController {
     @ResponseStatus(HttpStatus.OK)
     public void stopAllocation(@PathVariable("id") int id,
                                @RequestParam int memberId) {
-        // parkingAllocationService.stopAllocation(id, memberId);
+        parkingAllocationService.stopParkingAllocation(id, memberId);
     }
 }
