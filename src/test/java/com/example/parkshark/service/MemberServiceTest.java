@@ -1,33 +1,53 @@
 package com.example.parkshark.service;
 
+import com.example.parkshark.domain.Person;
+import com.example.parkshark.domain.address.Address;
+import com.example.parkshark.domain.dto.member.CreateLicensePlateDto;
+import com.example.parkshark.domain.dto.member.CreateMemberDto;
+import com.example.parkshark.domain.dto.member.CreateMemberWithPersonDto;
+import com.example.parkshark.domain.member.Membership;
+import com.example.parkshark.exceptions.PersonDoesNotExistException;
+import com.example.parkshark.mapper.MemberMapper;
+import com.example.parkshark.repository.MemberRepository;
+import com.example.parkshark.repository.PersonRepository;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
+import java.time.LocalDateTime;
+
 class MemberServiceTest {
-//
-//    private MemberService memberService;
-//    private MemberRepository memberRepository;
-//    private MemberMapper memberMapper;
-//    private PersonRepository personRepository;
-//    private Person person;
-//    private CreateMemberWithPersonIdDto createMemberDto;
-//
-//    @BeforeEach
-//    void setup() {
-//
-//        memberRepository = Mockito.mock(MemberRepository.class);
-//        memberMapper = Mockito.mock(MemberMapper.class);
-//        personRepository = Mockito.mock(PersonRepository.class);
-//        memberService = new MemberService(memberRepository, personRepository, memberMapper);
-//        person = new Person.Builder()
-//                .withId(10)
-//                .withAddress(new Address.Builder()
-//                        .withId(1)
-//                        .withStreetName("sinterklaaslaan")
-//                        .with
-//                        .withPostalCode(3000)
-//                        .withRegion("Leuven"));
-//        createMemberDto = new CreateMemberWithPersonIdDto(10, new CreateLicensePlateDto(), LocalDateTime.now(), Membership.BRONZE);
-//
-//    }
-//
+
+    private MemberService memberService;
+    private MemberRepository memberRepository;
+    private MemberMapper memberMapper;
+    private PersonRepository personRepository;
+    private Person person;
+    private CreateMemberDto createMemberDto;
+
+    @BeforeEach
+    void setup() {
+
+        memberRepository = Mockito.mock(MemberRepository.class);
+        memberMapper = Mockito.mock(MemberMapper.class);
+        personRepository = Mockito.mock(PersonRepository.class);
+        memberService = new MemberService(memberRepository, personRepository, memberMapper);
+        person = new Person.Builder()
+                .withId(10)
+                .withAddress(new Address.Builder()
+                        .withId(1)
+                        .withStreetName("sinterklaaslaan")
+                        .withStreetNumber(10)
+                        .withPostalCode(3000)
+                        .withRegion("Leuven")
+                        .build())
+                .build();
+        createMemberDto = new CreateMemberDto(1, new CreateLicensePlateDto(), "BRONZE");
+
+    }
+
 //    @DisplayName("registering a member")
 //    @Nested
 //    class registerAMember {

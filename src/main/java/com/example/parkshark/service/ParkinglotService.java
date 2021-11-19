@@ -13,6 +13,7 @@ import com.example.parkshark.repository.DivisionRepository;
 import com.example.parkshark.repository.ParkinglotRepository;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
+import org.apache.commons.validator.routines.EmailValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +72,7 @@ public class ParkinglotService {
 
 
     //HELPER METHODS
-    private void inputValidation(CreateParkinglotDto createParkinglotDto) {
+    public void inputValidation(CreateParkinglotDto createParkinglotDto) {
         hasValidEmailAddress(createParkinglotDto.getContactPerson().getEmail());
         hasValidTelephone(createParkinglotDto.getContactPerson().getTelephone(),
                 createParkinglotDto.getContactPerson().getMobileTelephone());
@@ -79,16 +80,13 @@ public class ParkinglotService {
         hasValidDivisionId(createParkinglotDto.getDivisionId());
     }
 
-    private void hasValidEmailAddress(String emailaddress) {
-        try {
-            InternetAddress emailAddr = new InternetAddress(emailaddress);
-            emailAddr.validate();
-        } catch (AddressException ex) {
+    public void hasValidEmailAddress(String emailaddress) {
+        if(!EmailValidator.getInstance().isValid(emailaddress)) {
             throw new InvalidEmailException("Not a valid emailaddress.");
         }
     }
 
-    private void hasValidTelephone(String telephone, String mobileTelephone) {
+    public void hasValidTelephone(String telephone, String mobileTelephone) {
         if (telephone == null && mobileTelephone == null) {
             throw new InvalidTelephoneException("Contactperson should have at least one telephone number.");
         }
@@ -98,7 +96,7 @@ public class ParkinglotService {
         }
     }
 
-    private boolean hasValidTelephoneNumber(String telephone) {
+    public boolean hasValidTelephoneNumber(String telephone) {
         if (!NumericCheck.isInteger(telephone)) {
             return false;
         }
@@ -113,7 +111,7 @@ public class ParkinglotService {
         return phoneUtil.isPossibleNumber(number);
     }
 
-    private void hasValidCategory(String category) {
+    public void hasValidCategory(String category) {
         if (!category.trim().equalsIgnoreCase(ParkinglotCategory.UNDERGROUND.getType())
                 && !category.trim().equalsIgnoreCase(ParkinglotCategory.ABOVEGROUND.getType()))
         {
@@ -123,7 +121,7 @@ public class ParkinglotService {
     }
 
 
-    private void hasValidDivisionId(int divisionId) {
+    public void hasValidDivisionId(int divisionId) {
         if (this.divisionRepository.findById(divisionId).isEmpty()) {
             throw new DivisionDoesNotExistException(String.format("Division with id %s not found.", divisionId));
         }

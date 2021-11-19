@@ -6,16 +6,15 @@ import com.example.parkshark.domain.dto.parkinglot.ParkinglotDto;
 import com.example.parkshark.domain.dto.person.CreatePersonDto;
 import com.example.parkshark.domain.parkinglot.Parkinglot;
 import com.example.parkshark.domain.parkinglot.ParkinglotCategory;
+import com.example.parkshark.exceptions.InvalidEmailException;
+import com.example.parkshark.exceptions.InvalidTelephoneException;
 import com.example.parkshark.mapper.ParkinglotMapper;
 import com.example.parkshark.repository.DivisionRepository;
 import com.example.parkshark.repository.ParkinglotRepository;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 
-import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
 
 class ParkinglotServiceTest {
@@ -32,7 +31,7 @@ class ParkinglotServiceTest {
         parkinglotRepositoryMock = Mockito.mock(ParkinglotRepository.class);
         divisionRepositoryMock = Mockito.mock(DivisionRepository.class);
         parkinglotMapperMock = Mockito.mock(ParkinglotMapper.class);
-        parkinglotService = new ParkinglotService(parkinglotRepositoryMock,divisionRepositoryMock, parkinglotMapperMock);
+        parkinglotService = new ParkinglotService(parkinglotRepositoryMock, divisionRepositoryMock, parkinglotMapperMock);
 
         createParkinglotDto = new CreateParkinglotDto(
                 "ParkinglotName",
@@ -93,4 +92,103 @@ class ParkinglotServiceTest {
 //        parkinglotService.getById("100");
 //        Mockito.verify(parkinglotRepositoryMock, times(1)).findById(100);
 //    }
+
+    @Nested
+    @DisplayName("check phoneNumber with hasValidTelephoneNumberMethod")
+    class checkPhoneNumber {
+        @DisplayName("Correct phoneNumber of nine and Ten numbers -> hasValidPhoneNumber method -> true")
+        @Test
+        void whenValidPhoneNumbersIsPassed_ThenTheValueReturnedFromTheValidationMethodIsTrue() {
+            //GIVEN
+            String telephoneNumber = "098765432";
+            String telephoneNumber2 = "0487211399";
+            //WHEN
+
+            //THEN
+            Assertions.assertTrue(parkinglotService.hasValidTelephoneNumber(telephoneNumber));
+            Assertions.assertTrue(parkinglotService.hasValidTelephoneNumber(telephoneNumber2));
+
+        }
+
+        @DisplayName("Invalid phoneNumbers -> hasValidPhoneNumber method -> false")
+        @Test
+        void whenAInValidPhoneNumberIsPassed_ThenTheValueReturnedFromTheValidationMethodIsFalse() {
+            //GIVEN
+            String telephoneNumber = "09871812";
+            String telephoneNumber2 = "09871812121";
+            //WHEN
+
+            //THEN
+            Assertions.assertFalse( parkinglotService.hasValidTelephoneNumber(telephoneNumber));
+            Assertions.assertFalse(parkinglotService.hasValidTelephoneNumber(telephoneNumber2));
+
+        }
+
+    }
+
+    @Nested
+    @DisplayName("check hasValidTelephoneNumber")
+    class checkHasValidTelephoneNumber {
+        @DisplayName("If valid Telephone number is present but no mobile number -> No exception")
+        @Test
+        void whenValidTelephoneNumberIsGivenButNoMobileNumber_ThenThereIsNoException() {
+            //GIVEN
+            String telephoneNumber = "098765432";
+            String mobileNumber = null;
+            //WHEN
+
+            //THEN
+            Assertions.assertDoesNotThrow(() -> parkinglotService.hasValidTelephone(telephoneNumber, mobileNumber));
+        }
+
+        @DisplayName("If valid mobile number is present but no telephone number -> No exception")
+        @org.junit.Test
+        void whenValidMobileNumberIsGivenButNoTelephoneNumber_ThenThereIsNoException() {
+            //GIVEN
+            String telephoneNumber = null;
+            String mobileNumber = "0487211399";
+            //WHEN
+
+            //THEN
+            Assertions.assertDoesNotThrow(() -> parkinglotService.hasValidTelephone(telephoneNumber, mobileNumber));
+        }
+
+        @DisplayName("If valid mobile number and telephone number are absent -> THROW exception")
+        @Test
+        void whenValidMobileNumberAndTelephoneAreGiven_ThenThereIsAException() {
+            //GIVEN
+            String telephoneNumber = null;
+            String mobileNumber = null;
+            //WHEN
+
+            //THEN
+            Assertions.assertThrows(InvalidTelephoneException.class,()->parkinglotService.hasValidTelephone(telephoneNumber, mobileNumber));
+        }
+    }
+    @Nested
+    @DisplayName("check hasValidTelephoneNumber")
+    class checkValidEmail {
+        @DisplayName("Valid email is given")
+        @Test
+        void whenValidEmailIsGiven_ThenDoNotThrowAnException(){
+            //GIVEN
+            String email ="test@gmail.com";
+            //WHEN
+
+            //THEN
+            Assertions.assertDoesNotThrow(()->parkinglotService.hasValidEmailAddress(email));
+        }
+        @DisplayName("Valid email is given")
+        @Test
+        void whenInValidEmailIsGiven_ThenDoNotThrowAnException(){
+            //GIVEN
+            String email ="test@gmailcom";
+            String email2 ="testgmail.com";
+            //WHEN
+
+            //THEN
+            Assertions.assertThrows(InvalidEmailException.class,()->parkinglotService.hasValidEmailAddress(email));
+            Assertions.assertThrows(InvalidEmailException.class,()->parkinglotService.hasValidEmailAddress(email2));
+        }
+    }
 }
