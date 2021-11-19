@@ -21,7 +21,7 @@ public class DivisionController {
         this.divisionService = divisionService;
     }
 
-    @PostMapping(consumes = {"application/json"})
+    @PostMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
     public void createDivision(@RequestBody CreateDivisionDto createDivisionDto) {
@@ -29,7 +29,7 @@ public class DivisionController {
         divisionService.saveDivision(createDivisionDto);
     }
 
-    @GetMapping(produces = {"application/json"})
+    @GetMapping(produces = "application/json")
     @ResponseStatus(HttpStatus.ACCEPTED)
     @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
     public List<DivisionDto> getAllDivision() {
@@ -37,7 +37,7 @@ public class DivisionController {
         return divisionService.findAll();
     }
 
-    @GetMapping(path = "/{divisionId}", produces = {"application/json"})
+    @GetMapping(path = "/{divisionId}", produces = "application/json")
     @ResponseStatus(HttpStatus.ACCEPTED)
     @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
     public DivisionDto getById(@PathVariable int divisionId) {
