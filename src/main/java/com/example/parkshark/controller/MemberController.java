@@ -31,13 +31,8 @@ public class MemberController {
     @SecurityGuard(SecurityGuard.ApiUserRole.MEMBER)
     @ResponseStatus(HttpStatus.CREATED)
     public void createMember(@RequestBody CreateMemberWithPersonIdDto createMemberDto) {
-        try {
             memberService.createMember(createMemberDto);
             logger.info("Member created");
-        } catch (RuntimeException e) {
-            logger.warn("Member not created.");
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, e.getMessage());
-        }
     }
 
     @GetMapping(produces = "application/json")
@@ -51,12 +46,7 @@ public class MemberController {
     @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
     @ResponseStatus(HttpStatus.OK)
     public MemberDto getMember(@PathVariable("id") String id) {
-        try {
             return this.memberService.getById(id);
-        } catch (RuntimeException e) {
-            logger.warn("Member not found.");
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, e.getMessage());
-        }
 
     }
 }

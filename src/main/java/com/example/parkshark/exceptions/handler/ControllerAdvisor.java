@@ -1,6 +1,7 @@
 package com.example.parkshark.exceptions.handler;
 
 import com.example.parkshark.exceptions.*;
+import io.swagger.v3.oas.models.links.Link;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @ControllerAdvice
 public class ControllerAdvisor {
@@ -50,9 +54,10 @@ public class ControllerAdvisor {
         response.sendError(HttpStatus.NOT_FOUND.value(), exception.getMessage());
     }
 
+    //TODO dit is een test
     @ExceptionHandler
     public void handlePersonDoesNotExistException(PersonDoesNotExistException exception, HttpServletResponse response) throws IOException{
-        logger.error("Person does not exist: "+ exception.getMessage());
+        logger.error("timestamp"+LocalDateTime.now()+"-> Person does not exist: "+ exception.getMessage());
         response.sendError(HttpStatus.NOT_FOUND.value(), exception.getMessage());
     }
 
