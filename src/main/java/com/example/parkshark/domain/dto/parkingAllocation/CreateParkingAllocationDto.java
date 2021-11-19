@@ -9,13 +9,11 @@ public class CreateParkingAllocationDto {
     private final int memberId;
     private final int parkinglotId;
     private final String licensePlate;
-    private final boolean allocationStatus;
 
-    public CreateParkingAllocationDto(int memberId, int parkinglotId, String licensePlate, boolean allocationStatus) {
+    public CreateParkingAllocationDto(int memberId, int parkinglotId, String licensePlate) {
         this.memberId = memberId;
         this.parkinglotId = parkinglotId;
         this.licensePlate = licensePlate;
-        this.allocationStatus = allocationStatus;
     }
 
     public int getMemberId() {
@@ -28,9 +26,5 @@ public class CreateParkingAllocationDto {
 
     public String getLicensePlate() {
         return licensePlate;
-    }
-
-    public boolean isAllocationStatus() {
-        return allocationStatus;
     }
 }

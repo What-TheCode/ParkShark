@@ -18,6 +18,8 @@ import java.util.stream.Collectors;
 @Component
 public class ParkingAllocationMapper {
 
+    private static final boolean START_STATUS_PARKING_ALLOCATION = true;
+
     private final MemberMapper memberMapper;
     private final ParkinglotMapper parkinglotMapper;
     private final MemberRepository memberRepository;
@@ -39,7 +41,7 @@ public class ParkingAllocationMapper {
                 .withParkinglot(parkinglot)
                 .withLicensePlat(createParkingAllocationDto.getLicensePlate())
                 .withStartingTime(LocalDateTime.now())
-                .withAllocationStatus(createParkingAllocationDto.isAllocationStatus())
+                .withAllocationStatus(START_STATUS_PARKING_ALLOCATION)
                 .build();
     }
 
