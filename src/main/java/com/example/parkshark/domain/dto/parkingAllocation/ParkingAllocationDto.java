@@ -52,12 +52,18 @@ public class ParkingAllocationDto {
     }
 
     public static class Builder {
+        private int id;
         private int memberId;
         private int parkinglotId;
         private String licensePlate;
         private LocalDateTime startingTime;
         private LocalDateTime stopTime;
         private boolean allocationStatus;
+
+        public ParkingAllocationDto.Builder withId(int id) {
+            this.id = id;
+            return this;
+        }
 
         public ParkingAllocationDto.Builder withMemberId(int memberId) {
             this.memberId = memberId;
@@ -91,6 +97,7 @@ public class ParkingAllocationDto {
 
         public ParkingAllocationDto build() {
             ParkingAllocationDto parkingAllocationDto = new ParkingAllocationDto();
+            parkingAllocationDto.id = this.id;
             parkingAllocationDto.memberId = this.memberId;
             parkingAllocationDto.parkinglotId = this.parkinglotId;
             parkingAllocationDto.licensePlate = this.licensePlate;

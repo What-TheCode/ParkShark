@@ -17,9 +17,12 @@ import com.example.parkshark.mapper.ParkinglotMapper;
 import com.example.parkshark.repository.MemberRepository;
 import com.example.parkshark.repository.ParkingAllocationRepository;
 import com.example.parkshark.repository.ParkinglotRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -70,8 +73,18 @@ public class ParkingAllocationService {
     }
 
 
-    public void stopParkingAllocation(int ParkingAllocationId, int memberId) {
-
+    public void stopParkingAllocation(int parkingAllocationId, int memberId) {
+        if (parkingAllocationRepository.findById(parkingAllocationId).isPresent()) {
+            ParkingAllocation parkingAllocation = parkingAllocationRepository.getById(parkingAllocationId);
+            if (parkingAllocation.getMember().getId() == memberId && parkingAllocation.isAllocationStatus()) {
+                parkingAllocation.setAllocationStatus(false);
+                parkingAllocation.setStopTime(LocalDateTime.now());
+            } else {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Parking allocation does not belong to this member.");
+            }
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Parking allocation does not exist.");
+        }
     }
 
     public ParkingAllocationDto findById(int id) {
