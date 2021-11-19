@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -39,7 +38,7 @@ public class MemberService {
         this.memberMapper = memberMapper;
     }
 
-    //TODO Check if person already is a member or not before creating new Member.
+
     public void createMember(CreateMemberWithPersonIdDto createMemberDto) {
         inputValidation(createMemberDto);
 
@@ -59,7 +58,7 @@ public class MemberService {
     }
 
     public MemberDto getById(String id) {
-        if(!NumericCheck.isInteger(id)) {
+        if (!NumericCheck.isInteger(id)) {
             throw new InvalidIdException(String.format("Id %s not found.", id));
         }
         int currentId = Integer.parseInt(id);
@@ -72,7 +71,6 @@ public class MemberService {
 
         return this.memberMapper.toDto(member);
     }
-
 
 
     //HELPER METHODS
@@ -91,7 +89,7 @@ public class MemberService {
     }
 
     private void isNotAMember(CreateMemberWithPersonIdDto createMemberDto) {
-        if(this.memberRepository.findByPersonId(createMemberDto.getPersonId()).isPresent()) {
+        if (this.memberRepository.findByPersonId(createMemberDto.getPersonId()).isPresent()) {
             logger.warn("Member not created.");
             throw new MemberAlreadyExistException(
                     String.format("Person with id %s already is a member.", createMemberDto.getPersonId()));
