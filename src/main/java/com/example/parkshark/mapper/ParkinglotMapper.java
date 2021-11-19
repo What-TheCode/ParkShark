@@ -1,9 +1,12 @@
 package com.example.parkshark.mapper;
 
+import com.example.parkshark.domain.Division;
 import com.example.parkshark.domain.dto.parkinglot.CreateParkinglotDto;
 import com.example.parkshark.domain.dto.parkinglot.ParkinglotDetailDto;
 import com.example.parkshark.domain.dto.parkinglot.ParkinglotDto;
 import com.example.parkshark.domain.parkinglot.Parkinglot;
+import com.example.parkshark.domain.parkinglot.ParkinglotCategory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,20 +17,24 @@ public class ParkinglotMapper {
 
     private final PersonMapper personMapper;
     private final AddressMapper addressMapper;
+    private final DivisionMapper divisionMapper;
 
-    public ParkinglotMapper(PersonMapper personMapper, AddressMapper addressMapper) {
+    @Autowired
+    public ParkinglotMapper(PersonMapper personMapper, AddressMapper addressMapper, DivisionMapper divisionMapper) {
         this.personMapper = personMapper;
         this.addressMapper = addressMapper;
+        this.divisionMapper = divisionMapper;
     }
 
-    public Parkinglot toEntity(CreateParkinglotDto createParkinglotDto) {
+    public Parkinglot toEntity(CreateParkinglotDto createParkinglotDto, Division division) {
         return new Parkinglot.Builder()
                 .withName(createParkinglotDto.getName())
-                .withCategory(createParkinglotDto.getCategory())
+                .withCategory(ParkinglotCategory.valueOf(createParkinglotDto.getCategory().trim().toUpperCase()))
                 .withCapacity(createParkinglotDto.getCapacity())
                 .withContactPerson(this.personMapper.toEntity(createParkinglotDto.getContactPerson()))
                 .withAddress(this.addressMapper.toEntity(createParkinglotDto.getAddress()))
                 .withPricePerHour(createParkinglotDto.getPricePerHour())
+                .withDivision(division)
                 .build();
     }
 
@@ -49,6 +56,7 @@ public class ParkinglotMapper {
                 .withContactPerson(personMapper.toDto(parkinglot.getContactPerson()))
                 .withAddress(addressMapper.toDto(parkinglot.getAddress()))
                 .withPricePerHour(parkinglot.getPricePerHour())
+                .withDivisionDto(this.divisionMapper.toDto(parkinglot.getDivision()))
                 .build();
     }
 

@@ -9,31 +9,33 @@ import org.springframework.stereotype.Component;
 public class CreateParkinglotDto {
 
     private String name;
-    private ParkinglotCategory category;
+    private String category;
     private int capacity;
     private CreatePersonDto contactPerson;
     private CreateAddressDto address;
     private double pricePerHour;
-//    private int divisionId;
+    private int divisionId;
 
 
     public CreateParkinglotDto() {
     }
 
-    public CreateParkinglotDto(String name, ParkinglotCategory category, int capacity, CreatePersonDto contactPerson, CreateAddressDto address, double pricePerHour) {
+    public CreateParkinglotDto(String name, String category, int capacity, CreatePersonDto contactPerson,
+                               CreateAddressDto address, double pricePerHour, int divisionId) {
         this.name = name;
         this.category = category;
         this.capacity = capacity;
         this.contactPerson = contactPerson;
         this.address = address;
         this.pricePerHour = pricePerHour;
+        this.divisionId = divisionId;
     }
 
     public String getName() {
         return name;
     }
 
-    public ParkinglotCategory getCategory() {
+    public String getCategory() {
         return category;
     }
 
@@ -53,7 +55,7 @@ public class CreateParkinglotDto {
         return pricePerHour;
     }
 
-    public void setAddress(CreateAddressDto address) {
-        this.address = address;
+    public int getDivisionId() {
+        return divisionId;
     }
 }

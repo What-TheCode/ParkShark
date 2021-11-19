@@ -98,9 +98,9 @@ public class MemberService {
 
     private void hasCorrectMembershipLevel(CreateMemberWithPersonIdDto createMemberDto) {
         String membershipLevel = createMemberDto.getMembershipLevel();
-        if (!membershipLevel.equalsIgnoreCase(Membership.BRONZE.getValue())
-                && !membershipLevel.equalsIgnoreCase(Membership.SILVER.getValue())
-                && !membershipLevel.equalsIgnoreCase(Membership.GOLD.getValue())) {
+        if (!membershipLevel.trim().equalsIgnoreCase(Membership.BRONZE.getValue())
+                && !membershipLevel.trim().equalsIgnoreCase(Membership.SILVER.getValue())
+                && !membershipLevel.trim().equalsIgnoreCase(Membership.GOLD.getValue())) {
             logger.warn("Member not created.");
             throw new MembershipDoesNotExistException(
                     String.format("Membership %s does not exist.", createMemberDto.getMembershipLevel()));

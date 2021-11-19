@@ -1,6 +1,8 @@
 package com.example.parkshark.domain.dto.parkinglot;
 
+import com.example.parkshark.domain.Division;
 import com.example.parkshark.domain.dto.address.AddressDto;
+import com.example.parkshark.domain.dto.division.DivisionDto;
 import com.example.parkshark.domain.dto.person.PersonDto;
 
 public class ParkinglotDetailDto {
@@ -10,6 +12,7 @@ public class ParkinglotDetailDto {
     private PersonDto contactPerson;
     private AddressDto address;
     private double pricePerHour;
+    private DivisionDto divisionDto;
 
     public int getId() {
         return id;
@@ -35,6 +38,10 @@ public class ParkinglotDetailDto {
         return pricePerHour;
     }
 
+    public DivisionDto getDivisionDto() {
+        return divisionDto;
+    }
+
     public static class Builder {
         private int id;
         private String name;
@@ -42,6 +49,7 @@ public class ParkinglotDetailDto {
         private PersonDto contactPerson;
         private AddressDto address;
         private double pricePerHour;
+        private DivisionDto divisionDto;
 
         public Builder withId(int id) {
             this.id = id;
@@ -73,6 +81,11 @@ public class ParkinglotDetailDto {
             return this;
         }
 
+        public Builder withDivisionDto(DivisionDto divisionDto) {
+            this.divisionDto = divisionDto;
+            return this;
+        }
+
         public ParkinglotDetailDto build() {
             ParkinglotDetailDto parkinglotDto = new ParkinglotDetailDto();
             parkinglotDto.id = this.id;
@@ -80,7 +93,9 @@ public class ParkinglotDetailDto {
             parkinglotDto.capacity = this.capacity;
             parkinglotDto.contactPerson = this.contactPerson;
             parkinglotDto.address = this.address;
-            parkinglotDto.pricePerHour = pricePerHour;
+            parkinglotDto.pricePerHour = this.pricePerHour;
+            parkinglotDto.divisionDto = this.divisionDto;
+
             return parkinglotDto;
         }
     }

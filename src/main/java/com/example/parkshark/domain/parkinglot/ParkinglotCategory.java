@@ -2,7 +2,7 @@ package com.example.parkshark.domain.parkinglot;
 
 public enum ParkinglotCategory {
     UNDERGROUND("Underground"),
-    ABOVEGROUND("Above ground");
+    ABOVEGROUND("Aboveground");
 
     private String type;
 

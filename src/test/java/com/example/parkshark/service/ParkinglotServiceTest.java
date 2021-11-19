@@ -7,6 +7,7 @@ import com.example.parkshark.domain.dto.person.CreatePersonDto;
 import com.example.parkshark.domain.parkinglot.Parkinglot;
 import com.example.parkshark.domain.parkinglot.ParkinglotCategory;
 import com.example.parkshark.mapper.ParkinglotMapper;
+import com.example.parkshark.repository.DivisionRepository;
 import com.example.parkshark.repository.ParkinglotRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,7 @@ import static org.mockito.Mockito.times;
 class ParkinglotServiceTest {
 
     private ParkinglotRepository parkinglotRepositoryMock;
+    private DivisionRepository divisionRepositoryMock;
     private ParkinglotService parkinglotService;
     private ParkinglotMapper parkinglotMapperMock;
 
@@ -28,12 +30,13 @@ class ParkinglotServiceTest {
     @BeforeEach
     void setupParkinglotService() {
         parkinglotRepositoryMock = Mockito.mock(ParkinglotRepository.class);
+        divisionRepositoryMock = Mockito.mock(DivisionRepository.class);
         parkinglotMapperMock = Mockito.mock(ParkinglotMapper.class);
-        parkinglotService = new ParkinglotService(parkinglotRepositoryMock, parkinglotMapperMock);
+        parkinglotService = new ParkinglotService(parkinglotRepositoryMock,divisionRepositoryMock, parkinglotMapperMock);
 
         createParkinglotDto = new CreateParkinglotDto(
                 "ParkinglotName",
-                ParkinglotCategory.UNDERGROUND,
+                ParkinglotCategory.UNDERGROUND.getType(),
                 250,
                 new CreatePersonDto(
                         "Firstname",
@@ -54,7 +57,8 @@ class ParkinglotServiceTest {
                         9000,
                         "Gent"
                 ),
-                2.5);
+                2.5,
+                13);
 
     }
 

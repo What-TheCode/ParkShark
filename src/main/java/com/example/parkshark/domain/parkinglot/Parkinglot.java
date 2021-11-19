@@ -1,5 +1,6 @@
 package com.example.parkshark.domain.parkinglot;
 
+import com.example.parkshark.domain.Division;
 import com.example.parkshark.domain.Person;
 import com.example.parkshark.domain.address.Address;
 
@@ -34,22 +35,24 @@ public class Parkinglot {
     @Column
     private double pricePerHour;
 
-//    @ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-//    @JoinColumn(name = "division_id")
-//    private Division division;
+    @ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinColumn(name = "division_id")
+    private Division division;
 
 
     public Parkinglot() {
 
     }
 
-    private Parkinglot(String name, ParkinglotCategory category, int capacity, Person contactPerson, Address address, double pricePerHour) {
+    public Parkinglot(String name, ParkinglotCategory category, int capacity,
+                      Person contactPerson, Address address, double pricePerHour, Division division) {
         this.name = name;
         this.category = category;
         this.capacity = capacity;
         this.contactPerson = contactPerson;
         this.address = address;
         this.pricePerHour = pricePerHour;
+        this.division = division;
     }
 
     public int getId() {
@@ -80,6 +83,10 @@ public class Parkinglot {
         return pricePerHour;
     }
 
+    public Division getDivision() {
+        return division;
+    }
+
     public static class Builder {
 
         private int id;
@@ -89,6 +96,7 @@ public class Parkinglot {
         private Person contactPerson;
         private Address address;
         private double pricePerHour;
+        private Division division;
 
         public Builder withId(int id) {
             this.id = id;
@@ -125,6 +133,11 @@ public class Parkinglot {
             return this;
         }
 
+        public Builder withDivision(Division division) {
+            this.division = division;
+            return this;
+        }
+
         public Parkinglot build() {
             Parkinglot parkinglot = new Parkinglot();
             parkinglot.id = this.id;
@@ -134,6 +147,7 @@ public class Parkinglot {
             parkinglot.contactPerson = this.contactPerson;
             parkinglot.address = this.address;
             parkinglot.pricePerHour = this.pricePerHour;
+            parkinglot.division = this.division;
 
             return parkinglot;
         }
