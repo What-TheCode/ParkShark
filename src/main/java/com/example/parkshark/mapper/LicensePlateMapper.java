@@ -15,6 +15,13 @@ public class LicensePlateMapper {
                 .build();
     }
 
+    public LicensePlate toEntity(LicensePlateDto licensePlateDto) {
+        return new LicensePlate.Builder()
+                .withLicensePlateNumber(licensePlateDto.getLicensePlateNumber())
+                .withIssuingCountry(licensePlateDto.getIssuingCountry())
+                .build();
+    }
+
     public LicensePlateDto toDto(LicensePlate licensePlate) {
         return new LicensePlateDto(
                 licensePlate.getId(),
