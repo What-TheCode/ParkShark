@@ -2,18 +2,14 @@ package com.example.parkshark.service;
 
 import com.example.parkshark.domain.dto.address.CreateAddressDto;
 import com.example.parkshark.domain.dto.parkinglot.CreateParkinglotDto;
-import com.example.parkshark.domain.dto.parkinglot.ParkinglotDto;
 import com.example.parkshark.domain.dto.person.CreatePersonDto;
-import com.example.parkshark.domain.parkinglot.Parkinglot;
 import com.example.parkshark.domain.parkinglot.ParkinglotCategory;
-import com.example.parkshark.exceptions.InvalidEmailException;
-import com.example.parkshark.exceptions.InvalidTelephoneException;
+import com.example.parkshark.exceptions.*;
 import com.example.parkshark.mapper.ParkinglotMapper;
 import com.example.parkshark.repository.DivisionRepository;
 import com.example.parkshark.repository.ParkinglotRepository;
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
-
 
 import static org.mockito.Mockito.times;
 
@@ -60,6 +56,62 @@ class ParkinglotServiceTest {
                 13);
 
     }
+
+    @Nested
+    @DisplayName("check hasValidCategory()")
+    class checkValidCategory {
+        @DisplayName("Category Underground and Aboveground are given")
+        @Test
+        void whenCategoryIsUndergroundOrAboveground_ThenDoNotThrowAnException() {
+            //GIVEN
+            //WHEN
+
+            //THEN
+            Assertions.assertDoesNotThrow(() -> parkinglotService.hasValidCategory("Underground"));
+            Assertions.assertDoesNotThrow(() -> parkinglotService.hasValidCategory("Aboveground"));
+        }
+
+        @DisplayName("Category is incorrect")
+        @Test
+        void whenInValidEmailIsGiven_ThenDoNotThrowAnException() {
+            //GIVEN
+
+            //WHEN
+
+            //THEN
+            Assertions.assertThrows(EmptyParkinglotCategoryException.class, () -> parkinglotService.hasValidCategory(null));
+            Assertions.assertThrows(ParkinglotCategoryDoesNotExistException.class, () -> parkinglotService.hasValidCategory("test"));
+        }
+    }
+
+    @Nested
+    @DisplayName("check hasValidDivision()")
+    class checkValidDivision {
+        // TODO fix database for test
+//        @DisplayName("Division exist")
+//        @Test
+//        void whenCategoryIsUndergroundOrAboveground_ThenDoNotThrowAnException() {
+//            //GIVEN
+//            //WHEN
+//
+//            //THEN
+//            Assertions.assertDoesNotThrow(() -> parkinglotService.hasValidDivisionId(13));
+//        }
+
+        @DisplayName("Category is incorrect")
+        @Test
+        void whenInValidCategoryIsGiven_ThenDoNotThrowAnException() {
+            //GIVEN
+
+            //WHEN
+
+            //THEN
+            Assertions.assertThrows(EmptyParkinglotCategoryException.class, () -> parkinglotService.hasValidCategory(null));
+            Assertions.assertThrows(ParkinglotCategoryDoesNotExistException.class, () -> parkinglotService.hasValidCategory("test"));
+        }
+    }
+
+
 }
 
   /*  @Test
@@ -95,7 +147,7 @@ class ParkinglotServiceTest {
 //    }
 
     @Nested
-    @DisplayName("check phoneNumber with hasValidTelephoneNumberMethod")
+    @DisplayName("check hasValidTelephoneNumberMethod()")
     class checkPhoneNumber {
         @DisplayName("Correct phoneNumber of nine and Ten numbers -> hasValidPhoneNumber method -> true")
         @Test
@@ -120,7 +172,7 @@ class ParkinglotServiceTest {
             //WHEN
 
             //THEN
-            Assertions.assertFalse( parkinglotService.hasValidTelephoneNumber(telephoneNumber));
+            Assertions.assertFalse(parkinglotService.hasValidTelephoneNumber(telephoneNumber));
             Assertions.assertFalse(parkinglotService.hasValidTelephoneNumber(telephoneNumber2));
 
         }
@@ -128,7 +180,7 @@ class ParkinglotServiceTest {
     }
 
     @Nested
-    @DisplayName("check hasValidTelephoneNumber")
+    @DisplayName("check hasValidTelephoneNumber()")
     class checkHasValidTelephoneNumber {
         @DisplayName("If valid Telephone number is present but no mobile number -> No exception")
         @Test
@@ -143,7 +195,7 @@ class ParkinglotServiceTest {
         }
 
         @DisplayName("If valid mobile number is present but no telephone number -> No exception")
-        @org.junit.Test
+        @Test
         void whenValidMobileNumberIsGivenButNoTelephoneNumber_ThenThereIsNoException() {
             //GIVEN
             String telephoneNumber = null;
@@ -163,33 +215,36 @@ class ParkinglotServiceTest {
             //WHEN
 
             //THEN
-            Assertions.assertThrows(InvalidTelephoneException.class,()->parkinglotService.hasValidTelephone(telephoneNumber, mobileNumber));
+            Assertions.assertThrows(InvalidTelephoneException.class, () -> parkinglotService.hasValidTelephone(telephoneNumber, mobileNumber));
         }
     }
+
     @Nested
-    @DisplayName("check hasValidTelephoneNumber")
+    @DisplayName("check hasValidEmail()")
     class checkValidEmail {
         @DisplayName("Valid email is given")
         @Test
-        void whenValidEmailIsGiven_ThenDoNotThrowAnException(){
+        void whenValidEmailIsGiven_ThenDoNotThrowAnException() {
             //GIVEN
-            String email ="test@gmail.com";
+            String email = "test@gmail.com";
             //WHEN
 
             //THEN
-            Assertions.assertDoesNotThrow(()->parkinglotService.hasValidEmailAddress(email));
+            Assertions.assertDoesNotThrow(() -> parkinglotService.hasValidEmailAddress(email));
         }
-        @DisplayName("Valid email is given")
+
+        @DisplayName("Email is incorrect")
         @Test
-        void whenInValidEmailIsGiven_ThenDoNotThrowAnException(){
+        void whenInValidEmailIsGiven_ThenDoNotThrowAnException() {
             //GIVEN
-            String email ="test@gmailcom";
-            String email2 ="testgmail.com";
+            String email = "test@gmailcom";
+            String email2 = "testgmail.com";
             //WHEN
 
             //THEN
-            Assertions.assertThrows(InvalidEmailException.class,()->parkinglotService.hasValidEmailAddress(email));
-            Assertions.assertThrows(InvalidEmailException.class,()->parkinglotService.hasValidEmailAddress(email2));
+            Assertions.assertThrows(InvalidEmailException.class, () -> parkinglotService.hasValidEmailAddress(email));
+            Assertions.assertThrows(InvalidEmailException.class, () -> parkinglotService.hasValidEmailAddress(email2));
+            Assertions.assertThrows(InvalidEmailException.class, () -> parkinglotService.hasValidEmailAddress(null));
         }
     }
 }*/
