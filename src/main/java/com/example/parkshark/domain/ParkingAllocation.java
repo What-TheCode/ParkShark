@@ -13,21 +13,27 @@ import java.time.LocalDateTime;
 public class ParkingAllocation {
 
     @Id
-    @SequenceGenerator(name = "parking_allocation_seq", sequenceName = "parking_allocation_seq", initialValue = 1, allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "parking_allocation_seq")
+    @SequenceGenerator(name = "parking_allocation_id_seq", sequenceName = "parking_allocation_id_seq", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "parking_allocation_id_seq")
     private int id;
+
     @JoinColumn(name = "member_id")
     @OneToOne
     private Member member;
+
     @JoinColumn(name = "parkinglot_id")
     @ManyToOne
     private Parkinglot parkinglot;
-    @Column(name = "license_plate_id")
+
+    @Column(name = "license_plate_number")
     private String licensePlate;
+
     @Column(name = "starting_time",columnDefinition = "TIMESTAMP")
     private LocalDateTime startingTime;
+
     @Column(name = "stop_time",columnDefinition = "TIMESTAMP")
     private LocalDateTime stopTime;
+
     @Column(name = "allocation_status")
     private boolean allocationStatus;
 

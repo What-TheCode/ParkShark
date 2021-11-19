@@ -7,7 +7,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ParkingAllocationRepository extends JpaRepository<ParkingAllocation, Integer> {
+
     List<ParkingAllocation> findParkingAllocationsByAllocationStatusIsTrue();
 
     List<ParkingAllocation> findParkingAllocationsByAllocationStatusIsFalse();
+
+    List<ParkingAllocation> findAllByParkinglotIdAndAllocationStatusTrue(int id);
 }

@@ -32,7 +32,7 @@ public class ParkingAllocationController {
     @SecurityGuard(SecurityGuard.ApiUserRole.MEMBER)
     @ResponseStatus(HttpStatus.CREATED)
     public void startAllocation(@RequestBody CreateParkingAllocationDto createParkingAllocationDto) {
-        parkingAllocationService.saveParkingAllocation(createParkingAllocationDto);
+        parkingAllocationService.startAllocation(createParkingAllocationDto);
     }
 
     @PutMapping(consumes = "application/json", path = "/{id}")

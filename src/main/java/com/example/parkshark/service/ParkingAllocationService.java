@@ -3,9 +3,13 @@ package com.example.parkshark.service;
 import com.example.parkshark.domain.ParkingAllocation;
 import com.example.parkshark.domain.dto.parkingAllocation.CreateParkingAllocationDto;
 import com.example.parkshark.domain.dto.parkingAllocation.ParkingAllocationDto;
+import com.example.parkshark.domain.member.LicensePlate;
 import com.example.parkshark.domain.member.Member;
+import com.example.parkshark.domain.member.Membership;
 import com.example.parkshark.domain.parkinglot.Parkinglot;
+import com.example.parkshark.exceptions.LicensePlateDoesNotMatchException;
 import com.example.parkshark.exceptions.MemberDoesNotExistException;
+import com.example.parkshark.exceptions.ParkingLotFullException;
 import com.example.parkshark.exceptions.ParkinglotDoesNotExistException;
 import com.example.parkshark.mapper.MemberMapper;
 import com.example.parkshark.mapper.ParkingAllocationMapper;
@@ -53,14 +57,18 @@ public class ParkingAllocationService {
         return parkingAllocationMapper.toDto(parkingAllocationRepository.findParkingAllocationsByAllocationStatusIsFalse());
     }
 
-    public void saveParkingAllocation(CreateParkingAllocationDto createParkingAllocationDto) {
-        validateInput(createParkingAllocationDto);
+    public void startAllocation(CreateParkingAllocationDto createParkingAllocationDto) {
+        validateUserInput(createParkingAllocationDto);
 
         Member member = this.memberRepository.getById(createParkingAllocationDto.getMemberId());
         Parkinglot parkinglot = this.parkinglotRepository.getById(createParkingAllocationDto.getParkinglotId());
+        LicensePlate licensePlate = member.getLicensePlate();
 
-        parkingAllocationRepository.save(parkingAllocationMapper.toEntity(createParkingAllocationDto, member, parkinglot));
+        parkingAllocationRepository.save(
+                parkingAllocationMapper.toEntity(
+                        createParkingAllocationDto, member, licensePlate, parkinglot));
     }
+
 
     public void stopParkingAllocation(int ParkingAllocationId, int memberId) {
 
@@ -74,21 +82,62 @@ public class ParkingAllocationService {
     }
 
 
+    //    The member is recognized by the system
+    //       The provided license plate number is the same as the member's license plate number
+//      It can be different, but only if the membership level is Gold
+//      The parking lot is recognized by the system
+
+//      The parking lot still has available capacity (it's not full)
+//            Make sure that the (started) parking allocation is uniquely identifiable (hint).
+//      Make sure that the member who started the parking allocation receives this id.
+//      A parking allocation should have a start time (when did the member start the allocation?)
+
+
     //HELPER METHODS
-    private void validateInput(CreateParkingAllocationDto createParkingAllocationDto) {
+    private void validateUserInput(CreateParkingAllocationDto createParkingAllocationDto) {
         isMember(createParkingAllocationDto.getMemberId());
         isParkinglot(createParkingAllocationDto.getParkinglotId());
+        isLicensePlateNumberOfMember(createParkingAllocationDto.getMemberId(), createParkingAllocationDto.getLicensePlate());
+        isFreeSpaceInParkinglot(createParkingAllocationDto.getParkinglotId());
     }
 
     private void isMember(int memberId) {
-        if(this.memberRepository.findById(memberId).isEmpty()) {
+        if (this.memberRepository.findById(memberId).isEmpty()) {
             throw new MemberDoesNotExistException(String.format("Member with id %s does not exist.", memberId));
         }
     }
 
     private void isParkinglot(int parkinglotId) {
-        if(this.parkinglotRepository.findById(parkinglotId).isEmpty()) {
+        if (this.parkinglotRepository.findById(parkinglotId).isEmpty()) {
             throw new ParkinglotDoesNotExistException(String.format("Parkinglot with id %s does not exist.", parkinglotId));
+        }
+    }
+
+    private void isLicensePlateNumberOfMember(int memberId, String licensePlate) {
+        Member member = this.memberRepository.getById(memberId);
+
+        if (member.getMembershipLevel().equals(Membership.GOLD)) {
+            return;
+        }
+
+        if (!member.getLicensePlate().getLicensePlateNumber().equalsIgnoreCase(licensePlate.trim())) {
+            throw new LicensePlateDoesNotMatchException(
+                    String.format(
+                            "Licenseplate %s does not match that of the member", licensePlate));
+        }
+    }
+
+    private void isFreeSpaceInParkinglot(int parkinglotId) {
+        int parkinglotCapacity = this.parkinglotRepository.getById(parkinglotId).getCapacity();
+
+        List<ParkingAllocation> parkingAllocationList =
+                this.parkingAllocationRepository.findAllByParkinglotIdAndAllocationStatusTrue(parkinglotId);
+
+        int currentParkingAllocationsForParkinglot =
+                parkingAllocationList.size();
+
+        if (parkinglotCapacity - currentParkingAllocationsForParkinglot <= 0) {
+            throw new ParkingLotFullException("Parkinglot is full.");
         }
     }
 }
