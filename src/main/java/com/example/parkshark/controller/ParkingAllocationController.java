@@ -1,5 +1,6 @@
 package com.example.parkshark.controller;
 
+import com.example.parkshark.domain.dto.parkingAllocation.CreateParkingAllocationDto;
 import com.example.parkshark.domain.dto.parkingAllocation.ParkingAllocationDto;
 import com.example.parkshark.security.switchsecure.SecurityGuard;
 import com.example.parkshark.service.ParkingAllocationService;
@@ -31,8 +32,8 @@ public class ParkingAllocationController {
     @PostMapping(consumes = "application/json")
     @SecurityGuard(SecurityGuard.ApiUserRole.MEMBER)
     @ResponseStatus(HttpStatus.CREATED)
-    public void startAllocation() {
-        // parkingAllocationService.startAllocation();
+    public void startAllocation(@RequestBody CreateParkingAllocationDto createParkingAllocationDto) {
+        // parkingAllocationService.startAllocation(createParkingAllocationDto);
     }
 
     @PutMapping(consumes = "application/json", path = "/{id}")
