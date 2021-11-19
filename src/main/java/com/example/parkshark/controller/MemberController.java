@@ -27,7 +27,7 @@ public class MemberController {
     }
 
     //TODO ApiUserRole MANAGER can also create a Member. This can't be possible.
-    @PostMapping(MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = "application/json")
     @SecurityGuard(SecurityGuard.ApiUserRole.MEMBER)
     @ResponseStatus(HttpStatus.CREATED)
     public void createMember(@RequestBody CreateMemberWithPersonIdDto createMemberDto) {
@@ -40,7 +40,7 @@ public class MemberController {
         }
     }
 
-    @GetMapping(MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = "application/json")
     @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
     @ResponseStatus(HttpStatus.OK)
     public List<MemberDto> getMembers() {
