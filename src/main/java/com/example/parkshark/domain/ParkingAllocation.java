@@ -3,6 +3,7 @@ package com.example.parkshark.domain;
 import com.example.parkshark.domain.member.LicensePlate;
 import com.example.parkshark.domain.member.Member;
 import com.example.parkshark.domain.parkinglot.Parkinglot;
+import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 public class ParkingAllocation {
 
     @Id
-    @SequenceGenerator(name = "parking_allocation_seq", sequenceName = "parking_allocation_seq",initialValue = 1, allocationSize = 1)
+    @SequenceGenerator(name = "parking_allocation_seq", sequenceName = "parking_allocation_seq", initialValue = 1, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "parking_allocation_seq")
     private int id;
     @JoinColumn(name = "member_id")
@@ -28,5 +29,76 @@ public class ParkingAllocation {
     @Column(name = "allocation_status")
     private boolean allocationStatus;
 
+    public ParkingAllocation() {
+    }
 
+    public int getId() {
+        return id;
+    }
+
+    public Member getMember() {
+        return member;
+    }
+
+    public Parkinglot getParkinglot() {
+        return parkinglot;
+    }
+
+    public String getLicensePlate() {
+        return licensePlate;
+    }
+
+    public LocalDateTime getStartingTime() {
+        return startingTime;
+    }
+
+    public boolean isAllocationStatus() {
+        return allocationStatus;
+    }
+
+    public static class Builder {
+        private Member member;
+        private Parkinglot parkinglot;
+        private String licensePlate;
+        private LocalDateTime startingTime;
+        private boolean allocationStatus;
+
+        public ParkingAllocation.Builder withMember(Member member) {
+            this.member = member;
+            return this;
+        }
+
+        public ParkingAllocation.Builder withParkinglot(Parkinglot parkinglot) {
+            this.parkinglot = parkinglot;
+            return this;
+        }
+
+        public ParkingAllocation.Builder withLicensePlat(String licensePlate) {
+            this.licensePlate = licensePlate;
+            return this;
+        }
+
+        public ParkingAllocation.Builder withStartingTime(LocalDateTime startingTime) {
+            this.startingTime = startingTime;
+            return this;
+        }
+
+        public ParkingAllocation.Builder withAllocationStatus(boolean allocationStatus) {
+            this.allocationStatus = allocationStatus;
+            return this;
+        }
+
+        public ParkingAllocation build() {
+            ParkingAllocation parkingAllocation = new ParkingAllocation();
+            parkingAllocation.member = this.member;
+            parkingAllocation.parkinglot = this.parkinglot;
+            parkingAllocation.licensePlate = this.licensePlate;
+            parkingAllocation.startingTime = this.startingTime;
+            parkingAllocation.allocationStatus = this.allocationStatus;
+
+            return parkingAllocation;
+        }
+
+
+    }
 }
