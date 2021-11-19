@@ -38,7 +38,8 @@ public class ParkingAllocationController {
     @PutMapping(consumes = "application/json", path = "/{id}")
     @SecurityGuard(SecurityGuard.ApiUserRole.MEMBER)
     @ResponseStatus(HttpStatus.OK)
-    public void stopAllocation(@PathVariable("id") int id) {
-        // parkingAllocationService.stopAllocation(id);
+    public void stopAllocation(@PathVariable("id") int id,
+                               @RequestParam int memberId) {
+        // parkingAllocationService.stopAllocation(id, memberId);
     }
 }
