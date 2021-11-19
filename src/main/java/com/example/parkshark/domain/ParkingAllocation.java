@@ -68,6 +68,16 @@ public class ParkingAllocation {
         return allocationStatus;
     }
 
+    public ParkingAllocation setStopTime(LocalDateTime stopTime) {
+        this.stopTime = stopTime;
+        return this;
+    }
+
+    public ParkingAllocation setAllocationStatus(boolean allocationStatus) {
+        this.allocationStatus = allocationStatus;
+        return this;
+    }
+
     public static class Builder {
         private Member member;
         private Parkinglot parkinglot;
