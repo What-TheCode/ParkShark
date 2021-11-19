@@ -1,4 +1,4 @@
-package com.example.parkshark.repository;
+package com.example.parkshark.repository.test;
 
 import com.example.parkshark.domain.Division;
 import org.springframework.data.jpa.repository.JpaRepository;

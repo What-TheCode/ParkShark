@@ -3,14 +3,12 @@ package com.example.parkshark.divisionDataJpaTest;
 import com.example.parkshark.domain.Division;
 import com.example.parkshark.domain.Person;
 import com.example.parkshark.domain.address.Address;
-import com.example.parkshark.repository.DivisionRepositorySpringData;
+import com.example.parkshark.repository.test.DivisionRepositorySpringData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)

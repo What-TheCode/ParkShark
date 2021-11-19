@@ -117,7 +117,6 @@ public class ParkinglotService {
         if (!category.trim().equalsIgnoreCase(ParkinglotCategory.UNDERGROUND.getType())
                 && !category.trim().equalsIgnoreCase(ParkinglotCategory.ABOVEGROUND.getType()))
         {
-            logger.warn("Parkinglot not created.");
             throw new ParkinglotCategoryDoesNotExistException(
                     String.format("Parkinglot category %s does not exist.", category));
         }
