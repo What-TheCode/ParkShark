@@ -5,10 +5,7 @@ import com.example.parkshark.domain.dto.member.CreateMemberWithPersonIdDto;
 import com.example.parkshark.domain.dto.member.MemberDto;
 import com.example.parkshark.domain.member.Member;
 import com.example.parkshark.domain.member.Membership;
-import com.example.parkshark.exceptions.InvalidIdException;
-import com.example.parkshark.exceptions.MemberDoesNotExistException;
-import com.example.parkshark.exceptions.MembershipDoesNotExistException;
-import com.example.parkshark.exceptions.PersonDoesNotExistException;
+import com.example.parkshark.exceptions.*;
 import com.example.parkshark.helperClasses.NumericCheck;
 import com.example.parkshark.mapper.MemberMapper;
 import com.example.parkshark.repository.MemberRepository;
@@ -44,30 +41,17 @@ public class MemberService {
 
     //TODO Check if person already is a member or not before creating new Member.
     public void createMember(CreateMemberWithPersonIdDto createMemberDto) {
-        if (this.personRepository.findById(createMemberDto.getPersonId()).isEmpty()) {
-            logger.warn("Member not created.");
-            throw new PersonDoesNotExistException(
-                    String.format("Person with id %s does not exist.", createMemberDto.getPersonId()));
-        }
-
-        String membershipLevel = createMemberDto.getMembershipLevel();
-        if (!membershipLevel.equalsIgnoreCase(Membership.BRONZE.getValue())
-                && !membershipLevel.equalsIgnoreCase(Membership.SILVER.getValue())
-                && !membershipLevel.equalsIgnoreCase(Membership.GOLD.getValue())) {
-            logger.warn("Member not created.");
-            throw new MembershipDoesNotExistException(
-                    String.format("Membership %s does not exist.", createMemberDto.getMembershipLevel()));
-        }
+        inputValidation(createMemberDto);
 
         CreateMemberWithPersonDto createMemberWithPersonDto = new CreateMemberWithPersonDto(
                 this.personRepository.getById(createMemberDto.getPersonId()),
                 createMemberDto.getCreateLicensePlateDto(),
                 LocalDateTime.now(),
-                Membership.valueOf(membershipLevel)
+                Membership.valueOf(createMemberDto.getMembershipLevel().toUpperCase())
         );
 
         this.memberRepository.save(this.memberMapper.toEntity(createMemberWithPersonDto));
-        logger.warn("Member created.");
+        logger.info("Member created.");
     }
 
     public List<MemberDto> getAll() {
@@ -87,5 +71,41 @@ public class MemberService {
         }
 
         return this.memberMapper.toDto(member);
+    }
+
+
+
+    //HELPER METHODS
+    private void inputValidation(CreateMemberWithPersonIdDto createMemberDto) {
+        hasPersonId(createMemberDto);
+        isNotAMember(createMemberDto);
+        hasCorrectMembershipLevel(createMemberDto);
+    }
+
+    private void hasPersonId(CreateMemberWithPersonIdDto createMemberDto) {
+        if (this.personRepository.findById(createMemberDto.getPersonId()).isEmpty()) {
+            logger.warn("Member not created.");
+            throw new PersonDoesNotExistException(
+                    String.format("Person with id %s does not exist.", createMemberDto.getPersonId()));
+        }
+    }
+
+    private void isNotAMember(CreateMemberWithPersonIdDto createMemberDto) {
+        if(this.memberRepository.findByPersonId(createMemberDto.getPersonId()).isPresent()) {
+            logger.warn("Member not created.");
+            throw new MemberAlreadyExistException(
+                    String.format("Person with id %s already is a member.", createMemberDto.getPersonId()));
+        }
+    }
+
+    private void hasCorrectMembershipLevel(CreateMemberWithPersonIdDto createMemberDto) {
+        String membershipLevel = createMemberDto.getMembershipLevel();
+        if (!membershipLevel.equalsIgnoreCase(Membership.BRONZE.getValue())
+                && !membershipLevel.equalsIgnoreCase(Membership.SILVER.getValue())
+                && !membershipLevel.equalsIgnoreCase(Membership.GOLD.getValue())) {
+            logger.warn("Member not created.");
+            throw new MembershipDoesNotExistException(
+                    String.format("Membership %s does not exist.", createMemberDto.getMembershipLevel()));
+        }
     }
 }
