@@ -60,8 +60,9 @@ class ParkinglotServiceTest {
                 13);
 
     }
+}
 
-    @Test
+  /*  @Test
     void whenParkingLotIsAdded_thenParkinglotRepositorySaveMethodIsCalledOneTime() {
 
         //when
@@ -191,4 +192,4 @@ class ParkinglotServiceTest {
             Assertions.assertThrows(InvalidEmailException.class,()->parkinglotService.hasValidEmailAddress(email2));
         }
     }
-}
+}*/
