@@ -35,11 +35,11 @@ public class ParkingAllocationController {
         parkingAllocationService.startAllocation(createParkingAllocationDto);
     }
 
-    @PutMapping(consumes = "application/json", path = "/{id}")
+    @PutMapping()
     @SecurityGuard(SecurityGuard.ApiUserRole.MEMBER)
     @ResponseStatus(HttpStatus.OK)
-    public void stopAllocation(@PathVariable("id") int id,
-                               @RequestParam int memberId) {
+    public void stopAllocation(@RequestParam("id") int id,
+                               @RequestParam("memberId") int memberId) {
         parkingAllocationService.stopParkingAllocation(id, memberId);
     }
 }
