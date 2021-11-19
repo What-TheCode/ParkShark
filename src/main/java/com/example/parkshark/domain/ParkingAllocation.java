@@ -24,8 +24,10 @@ public class ParkingAllocation {
     private Parkinglot parkinglot;
     @Column(name = "license_plate_id")
     private String licensePlate;
-    @Column(name = "starting_time")
+    @Column(name = "starting_time",columnDefinition = "TIMESTAMP")
     private LocalDateTime startingTime;
+    @Column(name = "stop_time",columnDefinition = "TIMESTAMP")
+    private LocalDateTime stopTime;
     @Column(name = "allocation_status")
     private boolean allocationStatus;
 
@@ -52,6 +54,10 @@ public class ParkingAllocation {
         return startingTime;
     }
 
+    public LocalDateTime getStopTime(){
+        return stopTime;
+    }
+
     public boolean isAllocationStatus() {
         return allocationStatus;
     }
@@ -61,6 +67,7 @@ public class ParkingAllocation {
         private Parkinglot parkinglot;
         private String licensePlate;
         private LocalDateTime startingTime;
+        private LocalDateTime stopTime;
         private boolean allocationStatus;
 
         public ParkingAllocation.Builder withMember(Member member) {
@@ -88,12 +95,18 @@ public class ParkingAllocation {
             return this;
         }
 
+        public ParkingAllocation.Builder withStopTime(LocalDateTime stopTime){
+            this.stopTime =stopTime;
+            return this;
+        }
+
         public ParkingAllocation build() {
             ParkingAllocation parkingAllocation = new ParkingAllocation();
             parkingAllocation.member = this.member;
             parkingAllocation.parkinglot = this.parkinglot;
             parkingAllocation.licensePlate = this.licensePlate;
             parkingAllocation.startingTime = this.startingTime;
+            parkingAllocation.stopTime=this.stopTime;
             parkingAllocation.allocationStatus = this.allocationStatus;
 
             return parkingAllocation;
