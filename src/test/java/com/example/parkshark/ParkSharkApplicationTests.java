@@ -30,5 +30,7 @@ class ParkSharkApplicationTests {
     void areAllRelevantBeansAvailable(){
         Assertions.assertThat(divisionController).isNotNull();
         Assertions.assertThat(parkinglotController).isNotNull();
+        Assertions.assertThat(memberController).isNotNull();
+
     }
 }
