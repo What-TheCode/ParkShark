@@ -27,7 +27,7 @@ public class ParkinglotController {
         this.parkinglotService = parkinglotService;
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = "application/json")
     @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
     @ResponseStatus(HttpStatus.CREATED)
     public void createParkinglot(@RequestBody CreateParkinglotDto createParkinglotDto) {
@@ -40,14 +40,14 @@ public class ParkinglotController {
         }
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = "application/json")
     @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
     @ResponseStatus(HttpStatus.OK)
     public List<ParkinglotDto> getParkinglots() {
         return parkinglotService.getAll();
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")
+    @GetMapping(produces = "application/json", path = "/{id}")
     @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
     @ResponseStatus(HttpStatus.OK)
     public ParkinglotDetailDto getParkinglotById(@PathVariable("id") String id) {
