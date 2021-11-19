@@ -43,8 +43,14 @@ public class ParkingAllocationService {
         this.parkinglotMapper = parkinglotMapper;
     }
 
-    public List<ParkingAllocationDto> findAll() {
-        return parkingAllocationMapper.toDto(parkingAllocationRepository.findAll());
+    public List<ParkingAllocationDto> findAll(Boolean isActive) {
+        if (isActive == null) {
+            return parkingAllocationMapper.toDto(parkingAllocationRepository.findAll());
+        }
+        if (isActive) {
+            return parkingAllocationMapper.toDto(parkingAllocationRepository.findParkingAllocationsByAllocationStatusIsTrue());
+        }
+        return parkingAllocationMapper.toDto(parkingAllocationRepository.findParkingAllocationsByAllocationStatusIsFalse());
     }
 
     public void saveParkingAllocation(CreateParkingAllocationDto createParkingAllocationDto) {
@@ -56,10 +62,8 @@ public class ParkingAllocationService {
         parkingAllocationRepository.save(parkingAllocationMapper.toEntity(createParkingAllocationDto, member, parkinglot));
     }
 
-    public void stopParkingAllocation(CreateParkingAllocationDto createParkingAllocationDto) {
-        if (!createParkingAllocationDto.isAllocationStatus()) {
-            throw new IllegalArgumentException("Allocation is already stopped");
-        }
+    public void stopParkingAllocation(int ParkingAllocationId, int memberId) {
+
     }
 
     public ParkingAllocationDto findById(int id) {
