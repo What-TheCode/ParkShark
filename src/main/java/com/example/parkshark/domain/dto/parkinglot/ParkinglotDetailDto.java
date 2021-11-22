@@ -1,6 +1,5 @@
 package com.example.parkshark.domain.dto.parkinglot;
 
-import com.example.parkshark.domain.Division;
 import com.example.parkshark.domain.dto.address.AddressDto;
 import com.example.parkshark.domain.dto.division.DivisionDto;
 import com.example.parkshark.domain.dto.person.PersonDto;

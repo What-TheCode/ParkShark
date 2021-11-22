@@ -1,8 +1,6 @@
 package com.example.parkshark.domain;
 
 import com.example.parkshark.domain.address.Address;
-import com.example.parkshark.domain.parkinglot.Parkinglot;
-import com.example.parkshark.domain.parkinglot.ParkinglotCategory;
 
 import javax.persistence.*;
 
@@ -21,7 +19,7 @@ public class Person {
     @Column
     private String lastName;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "address_id")
     private Address address;
 

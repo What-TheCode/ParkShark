@@ -25,7 +25,7 @@ public class DivisionController {
     @ResponseStatus(HttpStatus.CREATED)
     @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
     public void createDivision(@RequestBody CreateDivisionDto createDivisionDto) {
-        logger.info("Division is created with name "+ createDivisionDto.getName()+".");
+        logger.info("Division is created with name " + createDivisionDto.getName() + ".");
         divisionService.saveDivision(createDivisionDto);
     }
 
@@ -41,7 +41,7 @@ public class DivisionController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
     public DivisionDto getById(@PathVariable int divisionId) {
-        logger.info("Division with "+divisionId+" is retrieved.");
+        logger.info("Division with " + divisionId + " is retrieved.");
         return divisionService.findById((divisionId));
     }
 

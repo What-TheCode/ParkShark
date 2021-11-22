@@ -1,10 +1,7 @@
 package com.example.parkshark.domain.dto.division;
 
 
-import com.example.parkshark.domain.Division;
 import com.example.parkshark.domain.dto.person.PersonDto;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.lang.Nullable;
 
 import java.util.Objects;
 
@@ -34,7 +31,9 @@ public class DivisionDto {
         return director;
     }
 
-    public Integer getParentdivisionId(){return parentdivisionId; }
+    public Integer getParentdivisionId() {
+        return parentdivisionId;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -78,7 +77,7 @@ public class DivisionDto {
             return this;
         }
 
-        public Builder withParentDivisionId(Integer parentDivisionId){
+        public Builder withParentDivisionId(Integer parentDivisionId) {
             this.parentdivisionId = parentDivisionId;
             return this;
         }

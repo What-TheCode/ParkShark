@@ -2,7 +2,6 @@ package com.example.parkshark.domain.dto.parkinglot;
 
 import com.example.parkshark.domain.dto.address.CreateAddressDto;
 import com.example.parkshark.domain.dto.person.CreatePersonDto;
-import com.example.parkshark.domain.parkinglot.ParkinglotCategory;
 import org.springframework.stereotype.Component;
 
 @Component

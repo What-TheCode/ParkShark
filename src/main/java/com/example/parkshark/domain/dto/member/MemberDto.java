@@ -1,8 +1,6 @@
 package com.example.parkshark.domain.dto.member;
 
-import com.example.parkshark.domain.Person;
 import com.example.parkshark.domain.dto.person.PersonDto;
-import com.example.parkshark.domain.member.Membership;
 
 import java.time.LocalDateTime;
 

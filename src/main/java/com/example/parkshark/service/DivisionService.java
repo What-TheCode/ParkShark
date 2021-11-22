@@ -1,6 +1,5 @@
 package com.example.parkshark.service;
 
-import com.example.parkshark.domain.Division;
 import com.example.parkshark.domain.dto.division.CreateDivisionDto;
 import com.example.parkshark.domain.dto.division.DivisionDto;
 import com.example.parkshark.mapper.DivisionMapper;

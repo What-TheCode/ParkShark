@@ -1,7 +1,5 @@
 package com.example.parkshark.domain.dto.address;
 
-import org.springframework.stereotype.Component;
-
 public class CreateAddressDto {
 
     private String streetName;
