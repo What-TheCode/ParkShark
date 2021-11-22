@@ -112,17 +112,16 @@ class ParkinglotServiceTest {
     }
 
 
-}
-
-  /*  @Test
-    void whenParkingLotIsAdded_thenParkinglotRepositorySaveMethodIsCalledOneTime() {
-
-        //when
-        parkinglotService.createParkinglot(createParkinglotDto);
-
-        //then
-        Mockito.verify(parkinglotRepositoryMock, times(1)).save(Mockito.any());
-    }
+//TODO test does not retrieve
+//    @Test
+//    void whenParkingLotIsAdded_thenParkinglotRepositorySaveMethodIsCalledOneTime() {
+//
+//        //when
+//        parkinglotService.createParkinglot(createParkinglotDto);
+//
+//        //then
+//        Mockito.verify(parkinglotRepositoryMock, times(1)).save(Mockito.any());
+//    }
 
     @Test
     void whenGetAllParkinglots_thenParkinglotRepositoryFindAllAllMethodIsCalledOneTime() {
@@ -247,4 +246,16 @@ class ParkinglotServiceTest {
             Assertions.assertThrows(InvalidEmailException.class, () -> parkinglotService.hasValidEmailAddress(null));
         }
     }
-}*/
+//    @Nested
+//    @DisplayName("Check hasDivisionId()")
+//    class checkHasDivision{
+//        @DisplayName("DivisionId is correct")
+//        @Test
+//        void whenDivisionIdIsCorrect_ThenThrowNoException(){
+//            //GIVEN
+//            //WHEN
+//            //THEN
+//            Assertions.assertDoesNotThrow(()->parkinglotService.hasValidDivisionId(14));
+//        }
+//    }
+}
