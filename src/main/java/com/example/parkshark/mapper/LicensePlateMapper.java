@@ -23,10 +23,10 @@ public class LicensePlateMapper {
     }
 
     public LicensePlateDto toDto(LicensePlate licensePlate) {
-        return new LicensePlateDto(
-                licensePlate.getId(),
-                licensePlate.getLicensePlateNumber(),
-                licensePlate.getIssuingCountry()
-        );
+        return new LicensePlateDto.Builder()
+                .withId(licensePlate.getId())
+                .withLicensePlateNumber(licensePlate.getLicensePlateNumber())
+                .withIssuingCountry(licensePlate.getIssuingCountry())
+                .build();
     }
 }
