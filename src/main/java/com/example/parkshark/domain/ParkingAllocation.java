@@ -23,7 +23,7 @@ public class ParkingAllocation {
     @ManyToOne
     private Parkinglot parkinglot;
 
-    @Column(name = "license_plate_id")
+    @Column(name = "license_plate_number")
     private String licensePlate;
 
     @Column(name = "starting_time", columnDefinition = "TIMESTAMP")
