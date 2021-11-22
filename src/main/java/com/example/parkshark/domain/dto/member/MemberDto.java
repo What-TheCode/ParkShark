@@ -8,9 +8,13 @@ public class MemberDto {
 
     private int id;
     private PersonDto personDto;
-    private LicensePlateDto LicensePlateDto;
+    private LicensePlateDto licensePlateDto;
     private LocalDateTime registrationDate;
     private String membershipLevel;
+
+    public MemberDto() {
+
+    }
 
     public MemberDto(int id, PersonDto personDto,
                      LicensePlateDto licensePlateDto,
@@ -18,7 +22,7 @@ public class MemberDto {
                      String membershipLevel) {
         this.id = id;
         this.personDto = personDto;
-        LicensePlateDto = licensePlateDto;
+        this.licensePlateDto = licensePlateDto;
         this.registrationDate = registrationDate;
         this.membershipLevel = membershipLevel;
     }
@@ -32,7 +36,7 @@ public class MemberDto {
     }
 
     public com.example.parkshark.domain.dto.member.LicensePlateDto getLicensePlateDto() {
-        return LicensePlateDto;
+        return licensePlateDto;
     }
 
     public LocalDateTime getRegistrationDate() {
@@ -41,5 +45,51 @@ public class MemberDto {
 
     public String getMembershipLevel() {
         return membershipLevel;
+    }
+
+
+    public static class Builder {
+
+        private int id;
+        private PersonDto personDto;
+        private LicensePlateDto licensePlateDto;
+        private LocalDateTime registrationDate;
+        private String membershipLevel;
+
+        public Builder withId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder withPersonDto(PersonDto personDto) {
+            this.personDto = personDto;
+            return this;
+        }
+
+        public Builder withLicensePlateDto(LicensePlateDto licensePlateDto) {
+            this.licensePlateDto = licensePlateDto;
+            return this;
+        }
+
+        public Builder withRegistrationDate(LocalDateTime registrationDate) {
+            this.registrationDate = registrationDate;
+            return this;
+        }
+
+        public Builder withMembershipLevel(String membershipLevel) {
+            this.membershipLevel = membershipLevel;
+            return this;
+        }
+
+        public MemberDto build() {
+            MemberDto memberDto = new MemberDto();
+            memberDto.id = this.id;
+            memberDto.personDto = this.personDto;
+            memberDto.licensePlateDto = this.licensePlateDto;
+            memberDto.registrationDate = this.registrationDate;
+            memberDto.membershipLevel = this.membershipLevel;
+
+            return memberDto;
+        }
     }
 }

@@ -57,12 +57,12 @@ public class MemberMapper {
     }
 
     public MemberDto toDto(Member member) {
-        return new MemberDto(
-                member.getId(),
-                this.personMapper.toDto(member.getPerson()),
-                this.licensePlateMapper.toDto(member.getLicensePlate()),
-                member.getRegistrationDate(),
-                member.getMembershipLevel().getValue()
-        );
+        return new MemberDto.Builder()
+                .withId(member.getId())
+                .withPersonDto(this.personMapper.toDto(member.getPerson()))
+                .withLicensePlateDto(this.licensePlateMapper.toDto(member.getLicensePlate()))
+                .withRegistrationDate(member.getRegistrationDate())
+                .withMembershipLevel(member.getMembershipLevel().getValue())
+                .build();
     }
 }
