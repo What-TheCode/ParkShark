@@ -4,10 +4,7 @@ import com.example.parkshark.domain.dto.division.CreateDivisionDto;
 import com.example.parkshark.domain.dto.division.DivisionDto;
 import com.example.parkshark.domain.dto.parkinglot.CreateParkinglotDto;
 import com.example.parkshark.domain.parkinglot.ParkinglotCategory;
-import com.example.parkshark.exceptions.EmptyParkinglotCategoryException;
-import com.example.parkshark.exceptions.InvalidEmailException;
-import com.example.parkshark.exceptions.InvalidTelephoneException;
-import com.example.parkshark.exceptions.ParkinglotCategoryDoesNotExistException;
+import com.example.parkshark.exceptions.*;
 import com.example.parkshark.helperClasses.NumericCheck;
 import com.example.parkshark.mapper.DivisionMapper;
 import com.example.parkshark.repository.DivisionRepository;
@@ -53,10 +50,11 @@ public class DivisionService {
         hasValidEmailAddress(createDivisionDto.getDirector().getEmail());
         hasValidTelephone(createDivisionDto.getDirector().getTelephone(),
                 createDivisionDto.getDirector().getMobileTelephone());
+        hasValidParentDivisionId(createDivisionDto.getParentdivisionId());
     }
 
     public void hasValidEmailAddress(String emailaddress) {
-        if(!EmailValidator.getInstance().isValid(emailaddress)) {
+        if (!EmailValidator.getInstance().isValid(emailaddress)) {
             throw new InvalidEmailException("Not a valid emailaddress.");
         }
     }
@@ -84,5 +82,12 @@ public class DivisionService {
         phoneUtil.isPossibleNumberForType(number, PhoneNumberUtil.PhoneNumberType.FIXED_LINE_OR_MOBILE);
 
         return phoneUtil.isPossibleNumber(number);
+    }
+
+    private void hasValidParentDivisionId(Integer parentdivisionId) {
+        if (parentdivisionId == null) return;
+        if (this.divisionRepository.findById(parentdivisionId).isEmpty()) {
+            throw new InvalidParentDivisionException(String.format("Parent division with id %s does not exist.", parentdivisionId));
+        }
     }
 }
