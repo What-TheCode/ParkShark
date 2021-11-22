@@ -1,6 +1,7 @@
 package com.example.parkshark.domain;
 
 import com.example.parkshark.domain.address.Address;
+import org.h2.command.ddl.CreateTrigger;
 
 import javax.persistence.*;
 
@@ -71,6 +72,10 @@ public class Person {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getFullName() {
+        return String.format("%s %s", this.firstName, this.lastName);
     }
 
     public static class Builder {
