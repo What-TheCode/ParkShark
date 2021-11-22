@@ -1,9 +1,6 @@
 package com.example.parkshark.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.lang.Nullable;
-
 import javax.persistence.*;
 import java.util.Objects;
 

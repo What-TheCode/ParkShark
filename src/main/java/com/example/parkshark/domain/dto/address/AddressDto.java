@@ -1,8 +1,5 @@
 package com.example.parkshark.domain.dto.address;
 
-import com.example.parkshark.domain.dto.person.PersonDto;
-import org.springframework.stereotype.Component;
-
 public class AddressDto {
     private String streetName;
     private int streetNumber;

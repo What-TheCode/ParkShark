@@ -1,10 +1,5 @@
 package com.example.parkshark.domain.dto.parkingAllocation;
 
-import com.example.parkshark.domain.dto.member.MemberDto;
-import com.example.parkshark.domain.dto.parkinglot.ParkinglotDetailDto;
-
-import java.time.LocalDateTime;
-
 public class CreateParkingAllocationDto {
     private final int memberId;
     private final int parkinglotId;

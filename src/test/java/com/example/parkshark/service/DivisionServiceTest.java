@@ -1,20 +1,13 @@
 package com.example.parkshark.service;
 
-import com.example.parkshark.domain.Person;
-import com.example.parkshark.domain.dto.division.CreateDivisionDto;
-import com.example.parkshark.domain.dto.division.DivisionDto;
 import com.example.parkshark.mapper.DivisionMapper;
-import com.example.parkshark.repository.DivisionRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 class DivisionServiceTest {
     private DivisionMapper divisionMapper;
 
-//    @BeforeEach
+    //    @BeforeEach
 //    void setup(){
 //        this.divisionMapper = new DivisionMapper();
 //    }
@@ -37,9 +30,9 @@ class DivisionServiceTest {
 //    }
     @Nested
     @DisplayName("get all divisions")
-    class getAllDivisions{
+    class getAllDivisions {
         @DisplayName("get list of 2 division and check size of list")
-        void whenGettingAListOfTwoDivision_ThenTheSizeIsTwo(){
+        void whenGettingAListOfTwoDivision_ThenTheSizeIsTwo() {
             //GIVEN
 
             //WHEN

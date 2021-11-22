@@ -36,7 +36,7 @@ public class PersonMapper {
                 .build();
     }
 
-    public PersonDto toDto(Person person){
+    public PersonDto toDto(Person person) {
         return new PersonDto.Builder()
                 .withFirstName(person.getFirstName())
                 .withLastName(person.getLastName())

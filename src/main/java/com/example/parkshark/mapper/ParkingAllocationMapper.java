@@ -7,7 +7,6 @@ import com.example.parkshark.domain.member.LicensePlate;
 import com.example.parkshark.domain.member.Member;
 import com.example.parkshark.domain.parkinglot.Parkinglot;
 import com.example.parkshark.repository.MemberRepository;
-import com.example.parkshark.repository.ParkingAllocationRepository;
 import com.example.parkshark.repository.ParkinglotRepository;
 import org.springframework.stereotype.Component;
 

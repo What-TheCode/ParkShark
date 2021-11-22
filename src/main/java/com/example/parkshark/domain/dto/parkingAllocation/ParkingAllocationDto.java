@@ -1,13 +1,5 @@
 package com.example.parkshark.domain.dto.parkingAllocation;
 
-import com.example.parkshark.domain.ParkingAllocation;
-import com.example.parkshark.domain.Person;
-import com.example.parkshark.domain.dto.member.MemberDto;
-import com.example.parkshark.domain.dto.parkinglot.ParkinglotDto;
-import com.example.parkshark.domain.member.Member;
-import com.example.parkshark.domain.parkinglot.Parkinglot;
-import org.apache.tomcat.jni.Local;
-
 import java.time.LocalDateTime;
 
 public class ParkingAllocationDto {
@@ -43,7 +35,7 @@ public class ParkingAllocationDto {
         return startingTime;
     }
 
-    public LocalDateTime getStopTime(){
+    public LocalDateTime getStopTime() {
         return stopTime;
     }
 
@@ -90,8 +82,8 @@ public class ParkingAllocationDto {
             return this;
         }
 
-        public ParkingAllocationDto.Builder withStopTime(LocalDateTime stopTime){
-            this.stopTime =stopTime;
+        public ParkingAllocationDto.Builder withStopTime(LocalDateTime stopTime) {
+            this.stopTime = stopTime;
             return this;
         }
 
@@ -102,7 +94,7 @@ public class ParkingAllocationDto {
             parkingAllocationDto.parkinglotId = this.parkinglotId;
             parkingAllocationDto.licensePlate = this.licensePlate;
             parkingAllocationDto.startingTime = this.startingTime;
-            parkingAllocationDto.stopTime=this.stopTime;
+            parkingAllocationDto.stopTime = this.stopTime;
             parkingAllocationDto.allocationStatus = this.allocationStatus;
 
             return parkingAllocationDto;

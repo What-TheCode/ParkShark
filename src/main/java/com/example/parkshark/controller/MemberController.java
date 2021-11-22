@@ -29,8 +29,8 @@ public class MemberController {
     @SecurityGuard(SecurityGuard.ApiUserRole.MEMBER)
     @ResponseStatus(HttpStatus.CREATED)
     public void createMember(@RequestBody CreateMemberDto createMemberDto) {
-            memberService.createMember(createMemberDto);
-            logger.info("Member created");
+        memberService.createMember(createMemberDto);
+        logger.info("Member created");
     }
 
     @GetMapping(produces = "application/json")
@@ -44,7 +44,7 @@ public class MemberController {
     @SecurityGuard(SecurityGuard.ApiUserRole.MANAGER)
     @ResponseStatus(HttpStatus.OK)
     public MemberDto getMember(@PathVariable("id") String id) {
-            return this.memberService.getById(id);
+        return this.memberService.getById(id);
 
     }
 }

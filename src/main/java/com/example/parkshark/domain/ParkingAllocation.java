@@ -1,9 +1,7 @@
 package com.example.parkshark.domain;
 
-import com.example.parkshark.domain.member.LicensePlate;
 import com.example.parkshark.domain.member.Member;
 import com.example.parkshark.domain.parkinglot.Parkinglot;
-import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -25,13 +23,13 @@ public class ParkingAllocation {
     @ManyToOne
     private Parkinglot parkinglot;
 
-    @Column(name = "license_plate_number")
+    @Column(name = "license_plate_id")
     private String licensePlate;
 
-    @Column(name = "starting_time",columnDefinition = "TIMESTAMP")
+    @Column(name = "starting_time", columnDefinition = "TIMESTAMP")
     private LocalDateTime startingTime;
 
-    @Column(name = "stop_time",columnDefinition = "TIMESTAMP")
+    @Column(name = "stop_time", columnDefinition = "TIMESTAMP")
     private LocalDateTime stopTime;
 
     @Column(name = "allocation_status")
@@ -60,7 +58,7 @@ public class ParkingAllocation {
         return startingTime;
     }
 
-    public LocalDateTime getStopTime(){
+    public LocalDateTime getStopTime() {
         return stopTime;
     }
 
@@ -111,8 +109,8 @@ public class ParkingAllocation {
             return this;
         }
 
-        public ParkingAllocation.Builder withStopTime(LocalDateTime stopTime){
-            this.stopTime =stopTime;
+        public ParkingAllocation.Builder withStopTime(LocalDateTime stopTime) {
+            this.stopTime = stopTime;
             return this;
         }
 
@@ -122,7 +120,7 @@ public class ParkingAllocation {
             parkingAllocation.parkinglot = this.parkinglot;
             parkingAllocation.licensePlate = this.licensePlate;
             parkingAllocation.startingTime = this.startingTime;
-            parkingAllocation.stopTime=this.stopTime;
+            parkingAllocation.stopTime = this.stopTime;
             parkingAllocation.allocationStatus = this.allocationStatus;
 
             return parkingAllocation;

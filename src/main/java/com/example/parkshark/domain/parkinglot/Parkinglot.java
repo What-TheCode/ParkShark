@@ -35,7 +35,7 @@ public class Parkinglot {
     @Column
     private double pricePerHour;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "division_id")
     private Division division;
 
